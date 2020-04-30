@@ -38,4 +38,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation files('F:/androidproject/Shopping2/gradle/wrapper/gradle-wrapper.jar')
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.zhy:okhttputils:2.6.2'
 }
