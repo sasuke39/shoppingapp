@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
 
 import static android.content.ContentValues.TAG;
@@ -19,10 +20,9 @@ public class HomeFragment extends BaseFragment {
     public View initView() {
         Log.e(TAG,"主页面的Fragment ui被初始化");
 
-        textView = new TextView(my_Context);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(25);
-        return textView;
+        View view = View.inflate(my_Context, R.layout.fragment_home,null);
+
+        return view;
 
     }
 
@@ -30,6 +30,5 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
         super.initData();
         Log.e(TAG,"主页面的Fragment 数据被初始化");
-        textView.setText("主页面内容");
     }
 }
