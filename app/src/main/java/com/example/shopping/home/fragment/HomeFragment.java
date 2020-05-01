@@ -7,10 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
+import com.example.shopping.home.adapter.HomeFragmentAdapter;
+import com.example.shopping.home.bean.resultBeanData;
+import com.example.shopping.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -32,12 +37,13 @@ public class HomeFragment extends BaseFragment {
     private TextView tv_search_home;
     private TextView tv_message_home;
 
-//    private HomeFragmentAdapter adapter;
+    private HomeFragmentAdapter adapter;
 
     /**
      * 返回的数据
      */
-//    private ResultBeanData.ResultBean resultBean;
+    private resultBeanData.ResultBean resultBean;
+
     @Override
     public View initView() {
         Log.e(TAG, "主页视图被初始化了");
@@ -59,7 +65,13 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
         super.initData();
         Log.e(TAG, "主页数据被初始化了");
-        String url = "http://www.csdn.net/";
+        getDateFromNet();
+        //联网请求主页的数据
+//        getDataFromNet();
+    }
+
+    private void getDateFromNet() {
+        String url = Constants.HOME_URL;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -88,58 +100,50 @@ public class HomeFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG,"首页请求成功!"+response);
+                        Log.e(TAG,"首页请求成功!");
+
+                        //解析数据
+                        processData(response);
                     }
 
                 });
-        //联网请求主页的数据
-//        getDataFromNet();
     }
 
-//    private void getDataFromNet() {
-//        String url = Constants.HOME_URL;
-//        OkHttpUtils
-//                .get()
-//                .url(url)
-//                .build()
-//                .execute(new StringCallback() {
-//                    /**
-//                     * 当请求失败的时候回调
-//                     * @param call
-//                     * @param e
-//                     * @param id
-//                     */
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                        Log.e(TAG,"首页请求失败=="+e.getMessage());
-//                    }
-//
-//                    /**
-//                     * 当联网成功的时候回调
-//                     * @param response 请求成功的数据
-//                     * @param id
-//                     */
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Log.e(TAG,"首页请求成功=="+response);
-//                        //解析数据
-//                        processData(response);
-//                    }
-//
-//
-//                });
-//    }
+    private void processData(String json) {
+        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
+        /**
+         * 获取类resultBeanData对象中resultBean对象
+         */
+        resultBean = resultBeanData.getResult();
+//        Log.e(TAG,"解析成功=="+ resultBean.getHot_info().get(0).getName());
+        if(resultBean != null){
+
+            adapter = new HomeFragmentAdapter(my_Context,resultBean);
+            rvHome.setAdapter(adapter);
+            //设置布局管理者
+            rvHome.setLayoutManager(new GridLayoutManager(my_Context,1));
+
+        }
+
+    }
+
 
 //    private void processData(String json) {
-//        ResultBeanData resultBeanData = JSON.parseObject(json,ResultBeanData.class);
+//        /**
+//         * 把json转化成一个类对象
+//         */
+//        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
+//        /**
+//         * 获取类resultBeanData对象中resultBean对象
+//         */
 //        resultBean = resultBeanData.getResult();
+//
 //        if(resultBean != null){
 //            //有数据
 //            //设置适配器
-//            adapter = new HomeFragmentAdapter(mContext,resultBean);
+//            adapter = new HomeFragmentAdapter(my_Context,resultBean);
 //            rvHome.setAdapter(adapter);
-//            GridLayoutManager manager =  new GridLayoutManager(mContext,1);
+//            GridLayoutManager manager =  new GridLayoutManager(my_Context,1);
 //            //设置跨度大小监听
 //            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 //                @Override

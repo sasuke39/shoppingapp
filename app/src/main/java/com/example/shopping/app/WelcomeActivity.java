@@ -20,6 +20,6 @@ public class WelcomeActivity extends Activity { //去掉App就没有导航条
             startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
             //关闭当前页面
             finish();
-        },2000);
+        },500);
     }
 }
