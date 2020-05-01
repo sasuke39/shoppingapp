@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,6 +47,11 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
      */
     private int currentType = 0 ;
 
+    /**
+     * HomeFragmentAdapter 构造方法 初始化 iflater context resultbean
+     * @param my_context
+     * @param resultBean
+     */
     public HomeFragmentAdapter(Context my_context, resultBeanData.ResultBean resultBean) {
 
         this.my_context  = my_context;
@@ -54,10 +60,10 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
 
     }
 
-
     /**
      * 等同Getview();
      * * 创建ViewHolder
+     * 根据viewtype的不同创建不同的 bannerholder
      * @param parent
      * @param viewType 当前类型
      * @return
@@ -67,12 +73,18 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == BANNER){
             return new BannerViewHolder(my_context,inflater.inflate(R.layout.banner_viewpager,null));
+        }else if (viewType == CHANNEL){
+            return new ChannelViewHolder(my_context, inflater.inflate(R.layout.channel_item,null));
+
         }
         return null;
     }
 
     /**
      * getView();中的绑定数据模块
+     * 什么position得到什么viewtype
+     * 再把holder强制转为BannerHolder
+     * 绑定相应的数据
      * @param holder
      * @param position
      */
@@ -81,11 +93,58 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     if (getItemViewType(position) ==BANNER){
         BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
         bannerViewHolder.setData(resultBean.getBanner_info());
+    }else if(getItemViewType(position)==CHANNEL){
+            ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
+            channelViewHolder.setData(resultBean.getChannel_info());
+        }
+
     }
+    /**
+     * 总共的item
+     * @return
+     */
+    @Override
+    public int getItemCount() {
+        //开发过程中从一到6
+        return 2;
+    }
+
+    /**
+     * 得到类型
+     * @param position
+     * @return
+     */
+    @Override
+    public int getItemViewType(int position) {
+        switch (position){
+            case BANNER:
+                currentType = BANNER;
+                break;
+            case CHANNEL:
+                currentType = CHANNEL;
+                break;
+            case ACT:
+                currentType = ACT;
+                break;
+            case SECKILL:
+                currentType = SECKILL;
+                break;
+            case RECOMMEND:
+                currentType = RECOMMEND;
+                break;
+            case HOT:
+                currentType = HOT;
+                break;
+        }
+        return currentType;
     }
 
     /**
      * 创建所需的holder类
+     * 里面设置数据
+     * 构造方法
+     * 联网请求
+     * 点击事件
      */
     class BannerViewHolder extends RecyclerView.ViewHolder{
         private Context my_context;
@@ -134,45 +193,27 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
+    private class ChannelViewHolder extends RecyclerView.ViewHolder {
+        private Context my_context;
+        private GridView gv_channel;
+        private ChannelAdapter channelAdapter;
 
-
-    /**
-     * 总共的item
-     * @return
-     */
-    @Override
-    public int getItemCount() {
-        //开发过程中从一到6
-        return 1;
-    }
-
-    /**
-     * 得到类型
-     * @param position
-     * @return
-     */
-    @Override
-    public int getItemViewType(int position) {
-        switch (position){
-            case BANNER:
-                currentType = BANNER;
-                break;
-            case CHANNEL:
-                currentType = CHANNEL;
-                break;
-            case ACT:
-                currentType = ACT;
-                break;
-            case SECKILL:
-                currentType = SECKILL;
-                break;
-            case RECOMMEND:
-                currentType = RECOMMEND;
-                break;
-            case HOT:
-                currentType = HOT;
-                break;
+        public ChannelViewHolder(Context my_context, View itemView) {
+            super(itemView);
+            this.my_context = my_context;
+            gv_channel =  itemView.findViewById(R.id.gv_channel);
         }
-        return currentType;
+
+        public void setData(List<resultBeanData.ResultBean.ChannelInfoBean> channel_info) {
+            //得到数据后设置GridView的适配器
+            channelAdapter = new ChannelAdapter(my_context,channel_info);
+            gv_channel.setAdapter(channelAdapter);
+        }
     }
+
+
+//
+//     class ChannelViewHolder extends RecyclerView.ViewHolder{
+//
+//    }
 }
