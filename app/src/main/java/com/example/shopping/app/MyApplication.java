@@ -1,6 +1,7 @@
 package com.example.shopping.app;
 
 import android.app.Application;
+import android.content.Context;
 
 
 //import com.zhy.http.okhttp.OkHttpUtils;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 
 public class MyApplication extends Application {
+    private static Context my_context;
 
     @Override
     public void onCreate() {
@@ -34,5 +36,9 @@ public class MyApplication extends Application {
 
 
         OkHttpUtils.initClient(okHttpClient);
+    }
+
+    public static Context getContext() {
+        return my_context;
     }
 }

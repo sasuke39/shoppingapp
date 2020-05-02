@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".app.MainActivity">
         </activity>
+        <activity android:name=".app.GoodsInfoActivity">
+        </activity>
     </application>
 
 </manifest>

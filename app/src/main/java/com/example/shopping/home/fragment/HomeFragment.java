@@ -2,7 +2,6 @@ package com.example.shopping.home.fragment;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +18,7 @@ import com.example.shopping.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import butterknife.BindView;
 import okhttp3.Call;
-import okhttp3.Request;
 
 public class HomeFragment extends BaseFragment {
 
@@ -100,7 +97,7 @@ public class HomeFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG,"首页请求成功!");
+                        Log.e(TAG,"首页请求成功!"+response);
 
                         //解析数据
                         processData(response);
@@ -108,65 +105,70 @@ public class HomeFragment extends BaseFragment {
 
                 });
     }
-
-    private void processData(String json) {
-        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
-        /**
-         * 获取类resultBeanData对象中resultBean对象
-         */
-        resultBean = resultBeanData.getResult();
-//        Log.e(TAG,"解析成功=="+ resultBean.getHot_info().get(0).getName());
-        if(resultBean != null){
-
-            adapter = new HomeFragmentAdapter(my_Context,resultBean);
-            rvHome.setAdapter(adapter);
-            //设置布局管理者
-            rvHome.setLayoutManager(new GridLayoutManager(my_Context,1));
-
-        }
-
-    }
-
-
+//
 //    private void processData(String json) {
-//        /**
-//         * 把json转化成一个类对象
-//         */
 //        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
 //        /**
 //         * 获取类resultBeanData对象中resultBean对象
 //         */
 //        resultBean = resultBeanData.getResult();
-//
+////        Log.e(TAG,"解析成功=="+ resultBean.getHot_info().get(0).getName());
 //        if(resultBean != null){
-//            //有数据
-//            //设置适配器
+//
 //            adapter = new HomeFragmentAdapter(my_Context,resultBean);
 //            rvHome.setAdapter(adapter);
-//            GridLayoutManager manager =  new GridLayoutManager(my_Context,1);
-//            //设置跨度大小监听
-//            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-//                @Override
-//                public int getSpanSize(int position) {
-//                    if(position <= 3){
-//                        //隐藏
-//                        ib_top.setVisibility(View.GONE);
-//                    }else{
-//                        //显示
-//                        ib_top.setVisibility(View.VISIBLE);
-//                    }
-//                    //只能返回1
-//                    return 1;
-//                }
-//            });
 //            //设置布局管理者
-//            rvHome.setLayoutManager(manager);
+//            rvHome.setLayoutManager(new GridLayoutManager(my_Context,1));
 //
-//        }else{
-//            //没有数据
 //        }
-//        Log.e(TAG,"解析成功=="+resultBean.getHot_info().get(0).getName());
+//
 //    }
+
+
+    private void processData(String json) {
+        /**
+         * 把json转化成一个类对象
+         * 传来的json里的样式 不是数据 给转化成一个类
+         */
+        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
+        /**
+         * 获取类resultBeanData对象中resultBean对象
+         */
+        resultBean = resultBeanData.getResult();
+
+        if(resultBean != null){
+            //有数据
+            //设置适配器
+            adapter = new HomeFragmentAdapter(my_Context,resultBean);
+            rvHome.setAdapter(adapter);
+
+            /**
+             * ？？
+             */
+            GridLayoutManager manager =  new GridLayoutManager(my_Context,1);
+            //设置跨度大小监听
+            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if(position <= 3){
+                        //隐藏
+                        ib_top.setVisibility(View.GONE);
+                    }else{
+                        //显示
+                        ib_top.setVisibility(View.VISIBLE);
+                    }
+                    //只能返回1
+                    return 1;
+                }
+            });
+            //设置布局管理者
+            rvHome.setLayoutManager(manager);
+
+        }else{
+            //没有数据
+        }
+        Log.e(TAG,"解析成功=="+resultBean.getHot_info().get(0).getName());
+    }
 
     private void initListener() {
         //置顶的监听
