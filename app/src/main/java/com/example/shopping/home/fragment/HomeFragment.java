@@ -62,12 +62,16 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
         super.initData();
         Log.e(TAG, "主页数据被初始化了");
-        getDateFromNet();
+        getDataFromNet();
         //联网请求主页的数据
 //        getDataFromNet();
     }
 
-    private void getDateFromNet() {
+    /**
+     * 获取数据
+     * 成功回调解析函数
+     */
+    private void getDataFromNet() {
         String url = Constants.HOME_URL;
         OkHttpUtils
                 .get()
@@ -105,24 +109,7 @@ public class HomeFragment extends BaseFragment {
 
                 });
     }
-//
-//    private void processData(String json) {
-//        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
-//        /**
-//         * 获取类resultBeanData对象中resultBean对象
-//         */
-//        resultBean = resultBeanData.getResult();
-////        Log.e(TAG,"解析成功=="+ resultBean.getHot_info().get(0).getName());
-//        if(resultBean != null){
-//
-//            adapter = new HomeFragmentAdapter(my_Context,resultBean);
-//            rvHome.setAdapter(adapter);
-//            //设置布局管理者
-//            rvHome.setLayoutManager(new GridLayoutManager(my_Context,1));
-//
-//        }
-//
-//    }
+
 
 
     private void processData(String json) {
@@ -143,7 +130,7 @@ public class HomeFragment extends BaseFragment {
             rvHome.setAdapter(adapter);
 
             /**
-             * ？？
+             * 设置浮标
              */
             GridLayoutManager manager =  new GridLayoutManager(my_Context,1);
             //设置跨度大小监听
@@ -167,7 +154,7 @@ public class HomeFragment extends BaseFragment {
         }else{
             //没有数据
         }
-        Log.e(TAG,"解析成功=="+resultBean.getHot_info().get(0).getName());
+//        Log.e(TAG,"解析成功=="+resultBean.getHot_info().get(0).getName());
     }
 
     private void initListener() {

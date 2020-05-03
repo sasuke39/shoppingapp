@@ -37,11 +37,22 @@ public class ChannelAdapter extends BaseAdapter {
         return 0;
     }
 
+    /**
+     * 一个channle调用一个
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null){
             convertView = View.inflate(my_context,R.layout.item_channel,null);
+            /**
+             * 设置一个viewHolder控制单个频道的图标和标题
+             */
             viewHolder = new ViewHolder();
             viewHolder.iv_icon = convertView.findViewById(R.id.iv_channel);
             viewHolder.tv_title = convertView.findViewById(R.id.tv_channel);

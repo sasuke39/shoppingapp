@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
 import com.example.shopping.app.GoodsInfoActivity;
+import com.example.shopping.home.bean.GoodsBean;
 import com.example.shopping.home.bean.resultBeanData;
 import com.example.shopping.utils.Constants;
 import com.youth.banner.Banner;
@@ -167,6 +168,20 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         return currentType;
     }
 
+
+    /**
+     * 启动商品详情页面
+     * 商品信息列表页面
+     * @param goodsBean
+     */
+
+    private void startGoodsInfoActivity(GoodsBean goodsBean) {
+        Intent intent = new Intent(my_context, GoodsInfoActivity.class);
+        intent.putExtra(GOODS_BEAN,goodsBean);
+        my_context.startActivity(intent);
+
+    }
+
     /**
      * 创建所需的holder类
      * 里面设置数据
@@ -215,23 +230,14 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                     /**
                      * 弹出提示框position
                      */
-                    Toast.makeText(my_context,"position=="+position,Toast.LENGTH_SHORT).show();
-                    startGoodsInfoActivity();
+//                    Toast.makeText(my_context,"position=="+position,Toast.LENGTH_SHORT).show();
+//                    startGoodsInfoActivity(goodsBean);
                 }
             });
         }
 
     }
-    /**
-     * 启动商品详情页面
-     * 商品信息列表页面
-     */
 
-    private void startGoodsInfoActivity() {
-        Intent intent = new Intent(my_context, GoodsInfoActivity.class);
-        my_context.startActivity(intent);
-
-    }
 
     private class ChannelViewHolder extends RecyclerView.ViewHolder {
         private Context my_context;
@@ -247,7 +253,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onItemClick(AdapterView parent, View view, int position, long id) {
                     Toast.makeText(my_context, "position" + position, Toast.LENGTH_SHORT).show();
-                    startGoodsInfoActivity();
+//                    startGoodsInfoActivity(goodsBean);
                 }
             });
         }
@@ -256,6 +262,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             //得到数据后设置GridView的适配器
             channelAdapter = new ChannelAdapter(my_context,channel_info);
             gv_channel.setAdapter(channelAdapter);
+
+
         }
     }
 
@@ -315,7 +323,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
-                            startGoodsInfoActivity();
+//                            startGoodsInfoActivity(goodsBean);
 
                         }
                     });
@@ -349,36 +357,33 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             tv_more_recommend = (TextView) itemView.findViewById(R.id.tv_more_recommend);
             gv_recommend = (GridView) itemView.findViewById(R.id.gv_recommend);
 
-            gv_recommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(my_context,"position"+position,Toast.LENGTH_SHORT).show();
-                    startGoodsInfoActivity();
-                }
-            });
-
 
         }
 
         public void setData(final List<resultBeanData.ResultBean.RecommendInfoBean> recommend_info) {
             //1.有数据了
             //2.设置适配器
+            /**
+             * 适配器中设置在主页的显示和数据
+             */
             adapter = new RecommendGridViewAdapter(my_context,recommend_info);
             gv_recommend.setAdapter(adapter);
-
+            /**
+             * 点击事件后创建 goodsbean
+             * 调用goodsactivty函数跳转页面
+             */
             gv_recommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(my_context, "position=="+position, Toast.LENGTH_SHORT).show();
-                    startGoodsInfoActivity();
-//                    resultBeanData.ResultBean.RecommendInfoBean recommendInfoBean = recommend_info.get(position);
-//
-//                    GoodsBean goodsBean = new GoodsBean();
-//                    goodsBean.setCover_price(recommendInfoBean.getCover_price());
-//                    goodsBean.setFigure(recommendInfoBean.getFigure());
-//                    goodsBean.setName(recommendInfoBean.getName());
-//                    goodsBean.setProduct_id(recommendInfoBean.getProduct_id());
-//                    startGoodsInfoActivity(goodsBean);
+//                    Toast.makeText(my_context, "position=="+position, Toast.LENGTH_SHORT).show();
+                    resultBeanData.ResultBean.RecommendInfoBean recommendInfoBean = recommend_info.get(position);
+
+                    GoodsBean goodsBean = new GoodsBean();
+                    goodsBean.setCover_price(recommendInfoBean.getCover_price());
+                    goodsBean.setFigure(recommendInfoBean.getFigure());
+                    goodsBean.setName(recommendInfoBean.getName());
+                    goodsBean.setProduct_id(recommendInfoBean.getProduct_id());
+                    startGoodsInfoActivity(goodsBean);
                 }
             });
         }
@@ -407,20 +412,28 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
 
 
             //设置item的监听
+            /**
+             * 主页中热卖的点击事件
+             */
             gv_hot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(my_context, "position=="+position, Toast.LENGTH_SHORT).show();
-                    startGoodsInfoActivity();
+//                    Toast.makeText(my_context, "position=="+position, Toast.LENGTH_SHORT).show();
+//                    startGoodsInfoActivity();
 //                    //热卖商品信息类
-//                    ResultBeanData.ResultBean.HotInfoBean hotInfoBean =  hot_info.get(position);
+                    /**
+                     * 根据点击的position获得相应的hotinfo 信息
+                     * 再用这些信息实例化goodsbean
+                     */
+
+                    resultBeanData.ResultBean.HotInfoBean hotInfoBean =  hot_info.get(position);
 //                    //商品信息类
-//                    GoodsBean goodsBean = new GoodsBean();
-//                    goodsBean.setCover_price(hotInfoBean.getCover_price());
-//                    goodsBean.setFigure(hotInfoBean.getFigure());
-//                    goodsBean.setName(hotInfoBean.getName());
-//                    goodsBean.setProduct_id(hotInfoBean.getProduct_id());
-//                    startGoodsInfoActivity(goodsBean);
+                    GoodsBean goodsBean = new GoodsBean();
+                    goodsBean.setCover_price(hotInfoBean.getCover_price());
+                    goodsBean.setFigure(hotInfoBean.getFigure());
+                    goodsBean.setName(hotInfoBean.getName());
+                    goodsBean.setProduct_id(hotInfoBean.getProduct_id());
+                    startGoodsInfoActivity(goodsBean);
                 }
             });
         }
@@ -428,19 +441,5 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     }
 
 
-    /**
-     * 启动商品信息列表页面
-     * @param goodsBean
-     */
-//    private void startGoodsInfoActivity(GoodsBean goodsBean) {
-//        Intent intent = new Intent(my_context, GoodsInfoActivity.class);
-//        intent.putExtra(GOODS_BEAN,goodsBean);
-//        my_context.startActivity(intent);
-//    }
 
-
-//
-//     class ChannelViewHolder extends RecyclerView.ViewHolder{
-//
-//    }
 }

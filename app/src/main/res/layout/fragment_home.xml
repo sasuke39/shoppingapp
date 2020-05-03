@@ -9,6 +9,7 @@
         android:id="@+id/titlebar"
         layout="@layout/titlebar" />
 
+        <!--   代表整个页面 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
