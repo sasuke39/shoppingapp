@@ -18,6 +18,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        my_context =this;
         /**
          * 初始化OkhttpUtils
          */

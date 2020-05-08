@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
 import com.example.shopping.home.bean.GoodsBean;
+import com.example.shopping.shoppingcar.utils.CartStorage;
 import com.example.shopping.utils.Constants;
 
 //import static com.example.shopping.R.id.iv_good_info_image;
@@ -209,6 +210,9 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
              */
 
             Toast.makeText(this, "添加到购物车", Toast.LENGTH_SHORT).show();
+
+            CartStorage.getInstance().addData(goodsBean);
+
         }
         else if ( v == tvGoodInfoCallcenter ) {
             // Handle clicks for ibGoodInfoMore

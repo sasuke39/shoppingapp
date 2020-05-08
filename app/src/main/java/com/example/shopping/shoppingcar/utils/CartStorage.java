@@ -3,6 +3,7 @@ package com.example.shopping.shoppingcar.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.shopping.app.MyApplication;
@@ -24,6 +25,13 @@ public class CartStorage {
     //SparseArray的性能优于HashMap
     private SparseArray<GoodsBean> sparseArray;
 
+    /**
+     * 购物车构造函数
+     * 1.传入上下文
+     * 2.实例化一个sparesArray
+     * 3.调用listToSparseArray函数。（稀疏数组）
+     * @param context
+     */
     private CartStorage(Context context){
         this.mContext = context;
         //把之前存储的数据读取
@@ -34,25 +42,30 @@ public class CartStorage {
 
     /**
      * 从本地读取的数据加入到SparseArray中
+     * 1.通过getAllData函数得到一个goodsbean类型的list
+     * 2.遍历list,把里面所有的内容放入sparseArray对象中以key,value形式
      */
     private void listToSparseArray() {
         List<GoodsBean> goodsBeanList = getAllData();
         //把List数据转换成SparseArray
         for (int i= 0; i<goodsBeanList.size();i++){
             GoodsBean goodsBean = goodsBeanList.get(i);
-            sparseArray.put(Integer.parseInt(goodsBean.getProduct_id()),goodsBean);
+            sparseArray.put(Integer.parseInt(goodsBean.getProduct_id()),goodsBean);//（key，value）
         }
 
     }
 
     /**
      * 获取本地所有的数据
+     * 1.实例化一个goodsBeanlist的list
+     * 2.
      * @return
      */
     public List<GoodsBean> getAllData() {
         List<GoodsBean> goodsBeanList  = new ArrayList<>();
         //1.从本地获取
-        String json = CacheUtils.getString(mContext, JSON_CART);
+        Log.e("TAG", String.valueOf(mContext));
+        String json = CacheUtils.getString(mContext,JSON_CART);//json_cart
         //2.使用Gson转换成列表
         //判断不为空的时候执行
         if(!TextUtils.isEmpty(json)){
@@ -91,6 +104,7 @@ public class CartStorage {
             tempData.setNumber(1);
         }
 
+        Log.e("TAG",tempData.toString());
         //同步到内存中
         sparseArray.put(Integer.parseInt(tempData.getProduct_id()),tempData);
 
@@ -127,6 +141,9 @@ public class CartStorage {
 
     /**
      * 保持数据到本地
+     * 1.通过sparseTolist函数返回一个由稀疏数组遍历得到的一个Goodsbeanlist
+     * 2.转化为json
+     * 3.保存在json_cart中
      */
     private void saveLocal() {
         //1.SparseArray转换成List

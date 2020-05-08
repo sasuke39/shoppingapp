@@ -45,4 +45,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation project(path: ':banner')
     implementation 'com.google.code.gson:gson:2.8.6'
+//    implementation project(path: ':AddSubView')
 }

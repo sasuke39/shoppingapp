@@ -1,4 +1,0 @@
-#Sun May 03 01:14:40 GMT+08:00 2020
-base.0=F\:\\androidproject\\Shopping2\\ScrollViewContainer\\build\\intermediates\\dex\\debug\\out\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

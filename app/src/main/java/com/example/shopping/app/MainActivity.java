@@ -12,7 +12,7 @@ import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.community.fragment.CommunityFragment;
 import com.example.shopping.home.fragment.HomeFragment;
-import com.example.shopping.shoppingcar.fragment.ShopcarFragment;
+import com.example.shopping.shoppingcar.fragment.Shoppingcarfragment;
 import com.example.shopping.type.fragment.TypeFragment;
 import com.example.shopping.user.fragment.UserFragment;
 
@@ -158,7 +158,7 @@ public class MainActivity extends FragmentActivity {
         fragments.add(new HomeFragment());
         fragments.add(new TypeFragment());
         fragments.add(new CommunityFragment());
-        fragments.add(new ShopcarFragment());
+        fragments.add(new Shoppingcarfragment());
         fragments.add(new UserFragment());
     }
 
