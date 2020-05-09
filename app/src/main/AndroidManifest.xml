@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".app.GoodsInfoActivity">
         </activity>
+        <activity android:name=".app.LoginActivity">
+        </activity>
     </application>
 
 </manifest>

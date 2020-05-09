@@ -38,6 +38,7 @@ package com.example.shopping.user.fragment;//package com.example.shopping.user.f
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -46,6 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopping.R;
+import com.example.shopping.app.LoginActivity;
 import com.example.shopping.base.BaseFragment;
 
 
@@ -115,9 +117,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == ibUserIconAvator) {
-//            Intent intent = new Intent(my_Context, LoginActivity.class);
-//            startActivityForResult(intent, 0);
-//            startActivity(intent);
+            Intent intent = new Intent(my_Context, LoginActivity.class);
+            startActivityForResult(intent, 0);
+            startActivity(intent);
 
         } else if (v == ibUserSetting) {
             Toast.makeText(my_Context, "设置", Toast.LENGTH_SHORT).show();

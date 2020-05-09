@@ -28,18 +28,18 @@
             android:drawableTop="@drawable/home_button_selector"
             android:text="首页" />
 
-        <RadioButton
-            android:id="@+id/rb_type"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/type_button_selector"
-            android:text="分类" />
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_type"-->
+<!--            style="@style/MainButtonStyle"-->
+<!--            android:drawableTop="@drawable/type_button_selector"-->
+<!--            android:text="分类" />-->
 
-        <RadioButton
-            android:id="@+id/rb_community"
-            style="@style/MainButtonStyle"
-            android:drawableTop="@drawable/community_button_selector"
-            android:paddingTop="10dp"
-            android:text="发现" />
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_community"-->
+<!--            style="@style/MainButtonStyle"-->
+<!--            android:drawableTop="@drawable/community_button_selector"-->
+<!--            android:paddingTop="10dp"-->
+<!--            android:text="发现" />-->
 
         <RadioButton
             android:id="@+id/rb_cart"
