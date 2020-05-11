@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.shopping.R;
 import com.example.shopping.app.GoodsInfoActivity;
 import com.example.shopping.home.bean.GoodsBean;
-import com.example.shopping.home.bean.resultBeanData;
+import com.example.shopping.home.bean.MedreslutBeanData;
 import com.example.shopping.utils.Constants;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -47,7 +47,9 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
      */
     private  LayoutInflater inflater;
     private  Context my_context;
-    private  resultBeanData.ResultBean resultBean;
+    private  MedreslutBeanData.ResultBean resultBean;
+    private MedreslutBeanData.ResultMedcineBean resultMedcineBean;
+
 
     /**
      * 当前类型
@@ -60,10 +62,11 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
      * @param my_context
      * @param resultBean
      */
-    public HomeFragmentAdapter(Context my_context, resultBeanData.ResultBean resultBean) {
+    public HomeFragmentAdapter(Context my_context, MedreslutBeanData.ResultBean resultBean,MedreslutBeanData.ResultMedcineBean resultMedcineBean) {
 
         this.my_context  = my_context;
         this.resultBean = resultBean;
+        this.resultMedcineBean = resultMedcineBean;
         inflater = LayoutInflater.from(my_context);
 
     }
@@ -114,12 +117,21 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     else if (getItemViewType(position) == ACT) {
         ActViewHolder actViewHolder = (ActViewHolder) holder;
         actViewHolder.setData(resultBean.getAct_info());
-    } else if(getItemViewType(position) == RECOMMEND){
+    }
+
+
+    else if(getItemViewType(position) == RECOMMEND){
         RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
-        recommendViewHolder.setData(resultBean.getRecommend_info());
-    } else if(getItemViewType(position)==HOT){
+        recommendViewHolder.setData(resultMedcineBean.getHreat_med_info());
+
+    }
+
+
+
+
+    else if(getItemViewType(position)==HOT){
         HotViewHolder hotViewHolder = (HotViewHolder) holder;
-        hotViewHolder.setData(resultBean.getHot_info());
+        hotViewHolder.setData(resultMedcineBean.getSkin_med_info());
     }
         /**
          * 里面的方法
@@ -199,7 +211,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                 this.banner = itemView.findViewById(R.id.banner);
         }
 
-        public void setData(List<resultBeanData.ResultBean.BannerInfoBean> banner_info) {
+        public void setData(List<MedreslutBeanData.ResultBean.BannerInfoBean> banner_info) {
             //设置banner的数据
 
             //得到图片list地址
@@ -258,7 +270,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             });
         }
 
-        public void setData(List<resultBeanData.ResultBean.ChannelInfoBean> channel_info) {
+        public void setData(List<MedreslutBeanData.ResultBean.ChannelInfoBean> channel_info) {
             //得到数据后设置GridView的适配器
             channelAdapter = new ChannelAdapter(my_context,channel_info);
             gv_channel.setAdapter(channelAdapter);
@@ -277,7 +289,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             act_viewpager = (ViewPager) itemView.findViewById(R.id.act_viewpager);
         }
 
-        public void setData(final List<resultBeanData.ResultBean.ActInfoBean> act_info) {
+        public void setData(final List<MedreslutBeanData.ResultBean.ActInfoBean> act_info) {
             act_viewpager.setPageMargin(20);
             act_viewpager.setOffscreenPageLimit(3);//>=3
 
@@ -360,7 +372,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
 
         }
 
-        public void setData(final List<resultBeanData.ResultBean.RecommendInfoBean> recommend_info) {
+        public void setData(final List<MedreslutBeanData.ResultMedcineBean.HreatMedInfoBean> recommend_info) {
             //1.有数据了
             //2.设置适配器
             /**
@@ -376,13 +388,13 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                    Toast.makeText(my_context, "position=="+position, Toast.LENGTH_SHORT).show();
-                    resultBeanData.ResultBean.RecommendInfoBean recommendInfoBean = recommend_info.get(position);
+                    MedreslutBeanData.ResultMedcineBean.HreatMedInfoBean recommendInfoBean = recommend_info.get(position);
 
                     GoodsBean goodsBean = new GoodsBean();
-                    goodsBean.setCover_price(recommendInfoBean.getCover_price());
-                    goodsBean.setFigure(recommendInfoBean.getFigure());
-                    goodsBean.setName(recommendInfoBean.getName());
-                    goodsBean.setProduct_id(recommendInfoBean.getProduct_id());
+                    goodsBean.setCover_price(String.valueOf(recommendInfoBean.getCover_price()));
+                    goodsBean.setFigure(recommendInfoBean.getImg_url());
+                    goodsBean.setName(recommendInfoBean.getProduct_name());
+                    goodsBean.setProduct_id(String.valueOf(recommendInfoBean.getProduct_id()));
                     startGoodsInfoActivity(goodsBean);
                 }
             });
@@ -404,7 +416,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             gv_hot = (GridView) itemView.findViewById(R.id.gv_hot);
         }
 
-        public void setData(final List<resultBeanData.ResultBean.HotInfoBean> hot_info) {
+        public void setData(final List<MedreslutBeanData.ResultMedcineBean.SkinMedInfoBean> hot_info) {
             //1.有数据
             //2.设置GridView的适配器
             adapter = new HotGridViewAdapter(my_context,hot_info);
@@ -426,13 +438,14 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
                      * 再用这些信息实例化goodsbean
                      */
 
-                    resultBeanData.ResultBean.HotInfoBean hotInfoBean =  hot_info.get(position);
+                    MedreslutBeanData.ResultMedcineBean.SkinMedInfoBean hotInfoBean =  hot_info.get(position);
 //                    //商品信息类
                     GoodsBean goodsBean = new GoodsBean();
-                    goodsBean.setCover_price(hotInfoBean.getCover_price());
-                    goodsBean.setFigure(hotInfoBean.getFigure());
-                    goodsBean.setName(hotInfoBean.getName());
-                    goodsBean.setProduct_id(hotInfoBean.getProduct_id());
+                    goodsBean.setCover_price(String.valueOf(hotInfoBean.getCover_price()));
+                    goodsBean.setFigure(hotInfoBean.getImg_url());
+                    goodsBean.setName(hotInfoBean.getProduct_name());
+                    goodsBean.setProduct_id(String.valueOf(hotInfoBean.getProduct_id()));
+                    goodsBean.setDetails(hotInfoBean.getDetails());
                     startGoodsInfoActivity(goodsBean);
                 }
             });

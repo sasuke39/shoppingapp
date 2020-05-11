@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
-import com.example.shopping.home.bean.resultBeanData;
+import com.example.shopping.home.bean.MedreslutBeanData;
 import com.example.shopping.utils.Constants;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 class HotGridViewAdapter  extends BaseAdapter {
 
-    private final List<resultBeanData.ResultBean.HotInfoBean> datas;
+    private final List<MedreslutBeanData.ResultMedcineBean.SkinMedInfoBean> datas;
     private final Context my_context;
 
     /**
@@ -28,7 +28,7 @@ class HotGridViewAdapter  extends BaseAdapter {
      * @param my_context
      * @param hot_info
      */
-    public HotGridViewAdapter(Context my_context, List<resultBeanData.ResultBean.HotInfoBean> hot_info) {
+    public HotGridViewAdapter(Context my_context, List<MedreslutBeanData.ResultMedcineBean.SkinMedInfoBean> hot_info) {
         this.my_context =  my_context;
         this.datas = hot_info;
     }
@@ -74,9 +74,9 @@ class HotGridViewAdapter  extends BaseAdapter {
          * 根据position
          * 一个一个解析数据
          */
-        resultBeanData.ResultBean.HotInfoBean hotInfoBean = datas.get(position);
-        Glide.with(my_context).load(Constants.IMG_URL +hotInfoBean.getFigure()).into(viewHolder.iv_hot);
-        viewHolder.tv_name.setText(hotInfoBean.getName());
+        MedreslutBeanData.ResultMedcineBean.SkinMedInfoBean hotInfoBean = datas.get(position);
+        Glide.with(my_context).load(Constants.IMG_Med +hotInfoBean.getImg_url()).into(viewHolder.iv_hot);
+        viewHolder.tv_name.setText(hotInfoBean.getProduct_name());
         viewHolder.tv_price.setText("￥"+hotInfoBean.getCover_price());
         return convertView;
 

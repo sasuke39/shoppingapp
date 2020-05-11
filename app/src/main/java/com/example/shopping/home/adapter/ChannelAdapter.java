@@ -9,15 +9,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
-import com.example.shopping.home.bean.resultBeanData;
+import com.example.shopping.home.bean.MedreslutBeanData;
 import com.example.shopping.utils.Constants;
 
 import java.util.List;
 
 public class ChannelAdapter extends BaseAdapter {
     private final Context my_context;
-    private final List<resultBeanData.ResultBean.ChannelInfoBean>  datas;
-    public ChannelAdapter(Context my_context, List<resultBeanData.ResultBean.ChannelInfoBean> channel_info) {
+    private final List<MedreslutBeanData.ResultBean.ChannelInfoBean>  datas;
+    public ChannelAdapter(Context my_context, List<MedreslutBeanData.ResultBean.ChannelInfoBean> channel_info) {
         this.my_context = my_context;
         this.datas = channel_info;
     }
@@ -61,7 +61,7 @@ public class ChannelAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         //根据位置得到对应的数据
-        resultBeanData.ResultBean.ChannelInfoBean channelInfoBean = datas.get(position);
+        MedreslutBeanData.ResultBean.ChannelInfoBean channelInfoBean = datas.get(position);
         Glide.with(my_context).load(Constants.IMG_URL +channelInfoBean.getImage()).into(viewHolder.iv_icon );
         viewHolder.tv_title.setText(channelInfoBean.getChannel_name());
         return convertView;

@@ -3,9 +3,7 @@ package com.example.shopping.app;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,7 +49,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
 
         //设置图片
 //        iv_good_info_image
-        Glide.with(this).load(Constants.IMG_URL+goodsBean.getFigure()).into(ivGoodInfoImage);
+        Glide.with(this).load(Constants.IMG_Med+goodsBean.getFigure()).into(ivGoodInfoImage);
 
         //设置文本
         tvGoodInfoName.setText(goodsBean.getName());
@@ -59,36 +57,38 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         //设置价格
         tvGoodInfoPrice.setText("￥"+goodsBean.getCover_price());
 
+        tvGoodInfoDesc.setText(goodsBean.getDetails());
+
 
 //        setWebViewData(goodsBean.getProduct_id());
     }
-    private void setWebViewData(String product_id) {
-        if(product_id != null){
-            wbGoodInfoMore.loadUrl("http://www.atguigu.com");
-            //设置支持JavaScript
-            WebSettings webSettings = wbGoodInfoMore.getSettings();
-            webSettings.setUseWideViewPort(true);//支持双击页面变大变小
-            webSettings.setJavaScriptEnabled(true);//设置支持JavaScript
-            //优先使用缓存
-            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-            wbGoodInfoMore.setWebViewClient(new WebViewClient(){
-
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                    view.loadUrl(url);
-                    return true;
-                }
+//    private void setWebViewData(String product_id) {
+//        if(product_id != null){
+//            wbGoodInfoMore.loadUrl("http://www.atguigu.com");
+//            //设置支持JavaScript
+//            WebSettings webSettings = wbGoodInfoMore.getSettings();
+//            webSettings.setUseWideViewPort(true);//支持双击页面变大变小
+//            webSettings.setJavaScriptEnabled(true);//设置支持JavaScript
+//            //优先使用缓存
+//            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+//            wbGoodInfoMore.setWebViewClient(new WebViewClient(){
+//
 //                @Override
-//                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                        view.loadUrl(request.getUrl().toString());
-//                    }
+//                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                    //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+//                    view.loadUrl(url);
 //                    return true;
 //                }
-            });
-        }
-    }
+////                @Override
+////                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////                        view.loadUrl(request.getUrl().toString());
+////                    }
+////                    return true;
+////                }
+//            });
+//        }
+//    }
 
     private ImageButton ibGoodInfoBack;
     private ImageButton ibGoodInfoMore;
@@ -99,7 +99,6 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
     private TextView tvGoodInfoPrice;
     private TextView tvGoodInfoStore;
     private TextView tvGoodInfoStyle;
-
     private WebView wbGoodInfoMore;
 
     private LinearLayout llGoodsRoot;

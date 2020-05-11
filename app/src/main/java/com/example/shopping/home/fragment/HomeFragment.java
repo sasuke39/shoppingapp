@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.home.adapter.HomeFragmentAdapter;
-import com.example.shopping.home.bean.resultBeanData;
+import com.example.shopping.home.bean.MedreslutBeanData;
 import com.example.shopping.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -39,7 +39,9 @@ public class HomeFragment extends BaseFragment {
     /**
      * 返回的数据
      */
-    private resultBeanData.ResultBean resultBean;
+    private MedreslutBeanData.ResultBean resultBean;
+    private MedreslutBeanData.ResultMedcineBean resultMedcineBean;
+
 
     @Override
     public View initView() {
@@ -101,7 +103,7 @@ public class HomeFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG,"首页请求成功!"+response);
+                        Log.e(TAG,"首页请求成功!");
 
                         //解析数据
                         processData(response);
@@ -117,16 +119,17 @@ public class HomeFragment extends BaseFragment {
          * 把json转化成一个类对象
          * 传来的json里的样式 不是数据 给转化成一个类
          */
-        resultBeanData resultBeanData = JSON.parseObject(json, resultBeanData.class);
+        MedreslutBeanData medreslutBeanData = JSON.parseObject(json, MedreslutBeanData.class);
         /**
          * 获取类resultBeanData对象中resultBean对象
          */
-        resultBean = resultBeanData.getResult();
+        resultBean = medreslutBeanData.getResult();
+        resultMedcineBean = medreslutBeanData.getResult_medcine();
 
         if(resultBean != null){
             //有数据
             //设置适配器
-            adapter = new HomeFragmentAdapter(my_Context,resultBean);
+            adapter = new HomeFragmentAdapter(my_Context,resultBean,resultMedcineBean);
             rvHome.setAdapter(adapter);
 
             /**

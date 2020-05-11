@@ -172,7 +172,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         final GoodsBean goodsBean = datas.get(position);
         //2.设置数据
         holder.cb_gov.setChecked(goodsBean.isSelected());
-        Glide.with(mContext).load(Constants.IMG_URL + goodsBean.getFigure()).into(holder.iv_gov);
+        Glide.with(mContext).load(Constants.IMG_Med + goodsBean.getFigure()).into(holder.iv_gov);
         holder.tv_desc_gov.setText(goodsBean.getName());
         holder.tv_price_gov.setText("￥" + goodsBean.getCover_price());
         holder.ddSubView.setValue(goodsBean.getNumber());

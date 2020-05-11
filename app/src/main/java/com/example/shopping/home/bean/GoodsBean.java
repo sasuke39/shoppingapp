@@ -17,6 +17,16 @@ public class GoodsBean implements Serializable {
 
     private int number = 1;
 
+    private String details;
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
     /**
      * 是否被选中
      */
@@ -78,6 +88,7 @@ public class GoodsBean implements Serializable {
                 ", name='" + name + '\'' +
                 ", product_id='" + product_id + '\'' +
                 ", number=" + number +
+                ", details='" + details + '\'' +
                 ", isSelected=" + isSelected +
                 '}';
     }

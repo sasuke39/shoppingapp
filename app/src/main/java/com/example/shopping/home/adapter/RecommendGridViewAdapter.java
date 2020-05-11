@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
-import com.example.shopping.home.bean.resultBeanData;
+import com.example.shopping.home.bean.MedreslutBeanData;
 import com.example.shopping.utils.Constants;
 
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
  */
 public class RecommendGridViewAdapter extends BaseAdapter {
     private final Context mContext;
-    private final List<resultBeanData.ResultBean.RecommendInfoBean> datas;
+    private final List<MedreslutBeanData.ResultMedcineBean.HreatMedInfoBean> datas;
 
     /**
      * 适配器构造方法 初始化数据和上下文
      * @param mContext
      * @param recommend_info
      */
-    public RecommendGridViewAdapter(Context mContext, List<resultBeanData.ResultBean.RecommendInfoBean> recommend_info) {
+    public RecommendGridViewAdapter(Context mContext, List<MedreslutBeanData.ResultMedcineBean.HreatMedInfoBean> recommend_info) {
         this.mContext = mContext;
         this.datas = recommend_info;
     }
@@ -66,10 +66,10 @@ public class RecommendGridViewAdapter extends BaseAdapter {
         }
 
         //根据位置得到对应的数据
-        resultBeanData.ResultBean.RecommendInfoBean recommendInfoBean = datas.get(position);
-        Glide.with(mContext).load(Constants.IMG_URL +recommendInfoBean.getFigure()).into(viewHolder.iv_recommend);
-        viewHolder.tv_name.setText(recommendInfoBean.getName());
-        viewHolder.tv_price.setText(recommendInfoBean.getCover_price());
+        MedreslutBeanData.ResultMedcineBean.HreatMedInfoBean recommendInfoBean = datas.get(position);
+        Glide.with(mContext).load(Constants.IMG_Med +recommendInfoBean.getImg_url()).into(viewHolder.iv_recommend);
+        viewHolder.tv_name.setText(recommendInfoBean.getProduct_name());
+        viewHolder.tv_price.setText( "￥"+recommendInfoBean.getCover_price());
 
         return convertView;
 
