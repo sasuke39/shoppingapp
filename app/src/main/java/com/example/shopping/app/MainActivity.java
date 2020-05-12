@@ -12,6 +12,7 @@ import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.home.fragment.HomeFragment;
 import com.example.shopping.shoppingcar.fragment.Shoppingcarfragment;
+import com.example.shopping.type.fragment.TypeFragment;
 import com.example.shopping.user.fragment.UserFragment;
 
 import java.util.ArrayList;
@@ -154,7 +155,7 @@ public class MainActivity extends FragmentActivity {
     private void initFragment() {
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-//        fragments.add(new TypeFragment());
+        fragments.add(new TypeFragment());
 //        fragments.add(new CommunityFragment());
         fragments.add(new Shoppingcarfragment());
         fragments.add(new UserFragment());

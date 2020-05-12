@@ -1,3 +1,3 @@
-include ':app', ':banner', ':AddSubView'
+include ':app', ':banner', ':AddSubView', ':FlycoTabLayout_Lib'
 rootProject.name='Shopping'
 include ':ScrollViewContainer'
