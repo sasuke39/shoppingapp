@@ -54,5 +54,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation project(path: ':FlycoTabLayout_Lib')
 //    implementation project(path: ':AddSubView')
-//    implementation 'com.android.support:percent:26.0.0’
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
 }

@@ -1,8 +1,9 @@
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.percentlayout.widget.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".type.fragment.ListFragment">
 
     <ListView
@@ -19,5 +20,4 @@
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/lv_left"
         app:layout_widthPercent="78%" />
-</android.support.percent.PercentRelativeLayout>
-
+    </androidx.percentlayout.widget.PercentFrameLayout>

@@ -4,6 +4,7 @@ package com.example.shopping.type.fragment;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TypeFragment extends BaseFragment {
     private SegmentTabLayout segmentTabLayout;
@@ -25,6 +27,10 @@ public class TypeFragment extends BaseFragment {
     public ListFragment listFragment;
     public TagFragment tagFragment;
 
+    /**
+     * 初始化视图 实例化视图中的id
+     * @return
+     */
     @Override
     public View initView() {
         View view = View.inflate(my_Context, R.layout.fragment_type, null);
@@ -36,13 +42,16 @@ public class TypeFragment extends BaseFragment {
 
     }
 
+    /**
+     * 初始化数据
+     */
     @Override
     public void initData() {
         super.initData();
 
         initFragment();
-
-        String[] titles = {"分类", "标签"};
+//"标签"
+        String[] titles = {"分类","标签"};
 
         segmentTabLayout.setTabData(titles);
 
@@ -54,6 +63,7 @@ public class TypeFragment extends BaseFragment {
 
             @Override
             public void onTabReselect(int position) {
+                Toast.makeText(my_Context, "had clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -68,11 +78,20 @@ public class TypeFragment extends BaseFragment {
         switchFragment(tempFragment, fragmentList.get(0));
     }
 
+    /**
+     * 点击后一个隐藏前面一个
+     * 检查是否添加到transaction
+     * 没有 就 隐藏再添加
+     * 有 直接隐藏
+     * 最后show 下一个fragment
+     * @param fromFragment
+     * @param nextFragment
+     */
     public void switchFragment(Fragment fromFragment, BaseFragment nextFragment) {
         if (tempFragment != nextFragment) {
             tempFragment = nextFragment;
             if (nextFragment != null) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
                 //判断nextFragment是否添加
                 if (!nextFragment.isAdded()) {
                     //隐藏当前Fragment
@@ -92,6 +111,13 @@ public class TypeFragment extends BaseFragment {
         }
     }
 
+    /**
+     * 初始化fragment
+     * 实例化一个arraylist 一个list fragment
+     * 一个 tahfragment
+     * 在fragment 中添加listfragment tagment
+     *
+     */
     private void initFragment() {
         fragmentList = new ArrayList<>();
         listFragment = new ListFragment();
