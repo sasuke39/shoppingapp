@@ -12,6 +12,7 @@ import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.home.fragment.HomeFragment;
 import com.example.shopping.shoppingcar.fragment.Shoppingcarfragment;
+import com.example.shopping.type.fragment.TypeFragment;
 import com.example.shopping.user.fragment.UserFragment;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class MainActivity extends FragmentActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,31 +68,36 @@ public class MainActivity extends FragmentActivity {
         rgMain.check(R.id.rb_home);
     }
 
-    private void initListener() {
 
+    private void initListener() {
+        /**
+         * 根据点击位置获取一个position
+         */
         rgMain.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId){
                 case R.id.rb_home://主页
                     position = 0;
                     break;
-//                case R.id.rb_type://分类
-//                    position = 1;
-//                    break;
+                case R.id.rb_type://分类
+                    position = 1;
+                    break;
 //                case R.id.rb_community://发现
 //                    position = 2;
 //                    break;
                 case R.id.rb_cart://购物车
-                    position = 1;
+                    position = 2;
                     break;
                 case R.id.rb_user://用户中心
-                    position = 2;
+                    position = 3;
                     break;
                 default:
                     position = 0;
                     break;
             }
 
-            //根据位置取不同的Fragment
+            /**
+             * 根据position获取一个fragment
+             */
             BaseFragment baseFragment = getFragment(position);
 
             /**
@@ -137,7 +144,8 @@ public class MainActivity extends FragmentActivity {
                         transaction.hide(fromFragment);
                     }
                     //添加Fragment
-                    transaction.add(R.id.frameLayout, nextFragment).commit();
+                    FragmentTransaction add = transaction.add(R.id.frameLayout, nextFragment);
+                    add.commit();
                 } else {
                     //隐藏当前Fragment
                     if (fromFragment != null) {
@@ -154,7 +162,7 @@ public class MainActivity extends FragmentActivity {
     private void initFragment() {
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-//        fragments.add(new TypeFragment());
+        fragments.add(new TypeFragment());
 //        fragments.add(new CommunityFragment());
         fragments.add(new Shoppingcarfragment());
         fragments.add(new UserFragment());

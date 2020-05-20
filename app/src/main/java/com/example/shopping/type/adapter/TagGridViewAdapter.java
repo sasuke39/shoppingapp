@@ -12,9 +12,7 @@ import com.example.shopping.type.bean.TagBean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/10/2.
- */
+
 public class TagGridViewAdapter extends BaseAdapter {
     private Context mContext;
     private List<TagBean.ResultBean> result;

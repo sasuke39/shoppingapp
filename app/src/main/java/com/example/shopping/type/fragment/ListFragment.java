@@ -17,6 +17,7 @@ import com.example.shopping.base.BaseFragment;
 import com.example.shopping.type.adapter.TypeLeftAdapter;
 import com.example.shopping.type.adapter.TypeRightAdapter;
 import com.example.shopping.type.bean.TypeBean;
+import com.example.shopping.utils.Constants;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -36,11 +37,11 @@ public class ListFragment extends BaseFragment {
     private RecyclerView rv_right;
     private List<TypeBean.ResultBean> result;
 
-//    private String[] urls = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL,
-//            Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL,
-//            Constants.DIGIT_URL, Constants.GAME_URL};
-//
-//
+    private String[] urls = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL,
+            Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL,
+            Constants.DIGIT_URL, Constants.GAME_URL};
+
+
 
     private TypeLeftAdapter leftAdapter;
     private boolean isFirst = true;
@@ -57,7 +58,7 @@ public class ListFragment extends BaseFragment {
     public void initData() {
         super.initData();
         //联网请求
-//        getDataFromNet(urls[0]);
+        getDataFromNet(urls[0]);
     }
 
     /**

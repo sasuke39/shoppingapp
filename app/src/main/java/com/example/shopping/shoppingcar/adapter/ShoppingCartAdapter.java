@@ -31,6 +31,21 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     private final CheckBox cbAll;
 
 
+    /**
+     * 购物车适配器构造函数
+     * 1.上下文
+     * 2.货物列表
+     * 3.总价
+     * 4.全选
+     * 5.编辑界面全选
+     * 6.展示商品总价
+     *
+     * @param mContext
+     * @param goodsBeanList
+     * @param tvShopcartTotal
+     * @param checkboxAll
+     * @param cbAll
+     */
     public ShoppingCartAdapter(Context mContext, List<GoodsBean> goodsBeanList, TextView tvShopcartTotal, CheckBox checkboxAll, CheckBox cbAll) {
         this.mContext = mContext;
         this.datas = goodsBeanList;
@@ -44,6 +59,15 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         checkAll();
     }
 
+
+    /**
+     * 根据位置找所点击的item
+     * 1.获取货物数据
+     * 2.商品选择状态取反
+     * 3.传入一个pos位置，通知RecyclerView该pos位置已经失效，需要重新绘制和UI更新
+     * 4.是否全选
+     * 5.根据选择的计算总价
+     */
     private void setListener() {
         setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -61,7 +85,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             }
         });
 
-        //CheckBox的点击事件
+
+        /**
+         * 正常界面的全选
+         * 1.点击后 获取全选状态
+         * 2.根据状态设置所有item 选中状态 再刷新每个item
+         * 3.根据选中状态设置总价格
+         */
         checkboxAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +126,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     /**
      * 设置全选和非全选
+     * 1.货物不能为空
+     * 2.每一个货物的选中状态设置为isCheck 再刷新这个item
      * @param isCheck
      */
     public void checkAll_none(boolean isCheck) {
@@ -108,6 +140,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         }
     }
 
+    /**
+     * 1.货物不能为空
+     * 2.遍历数据 只要有一个没有选中 全选设置为false
+     * 3.有一个选中 number加一
+     * 4.判断number是不是全部货物的数量 再设置全选状态
+     */
     public void checkAll() {
         if(datas != null && datas.size() >0){
             int number = 0;
@@ -159,6 +197,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         }
         return totalPrice;
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -257,7 +297,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
          */
        public void  onItemClick(int position);
     }
+
+
     private OnItemClickListener onItemClickListener;
+
 
     /**
      * 设置item的监听
@@ -266,4 +309,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
+
 }

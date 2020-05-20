@@ -57,6 +57,9 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         mLayoutInflater = LayoutInflater.from(mContext);
 
+        /**
+         * 设置默认分类的展示
+         */
         if (result != null && result.size() > 0) {
             child = result.get(0).getChild();
             hot_product_list = result.get(0).getHot_product_list();
@@ -160,7 +163,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ImageView imageView = new ImageView(mContext);
                 //请求图片
                 Glide.with(mContext)
-                        .load(Constants.IMG_Med +hot_product_list.get(i).getFigure())
+                        .load(Constants.IMG_URL +hot_product_list.get(i).getFigure())
                         .into(imageView);
                 //设置距离底部有10个dp
                 lp.setMargins(0, 0, 0, DensityUtil.dip2px(mContext, 10));

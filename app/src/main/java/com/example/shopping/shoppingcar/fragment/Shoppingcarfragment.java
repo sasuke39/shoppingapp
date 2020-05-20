@@ -174,6 +174,13 @@ public class Shoppingcarfragment extends BaseFragment implements View.OnClickLis
     private void showData() {
         List<GoodsBean> goodsBeanList = CartStorage.getInstance().getAllData();
 
+        /**
+         * 流程
+         * 1.查看购物车是否有数据
+         * 2.有数据显示编辑和结算界面
+         * 3.隐藏空界面
+         * 4.设置购物车适配器 放入物品数据 总价 全选 编辑界面的全选
+         */
         if (goodsBeanList != null && goodsBeanList.size() > 0) {
             tvShopcartEdit.setVisibility(View.VISIBLE);
             llCheckAll.setVisibility(View.VISIBLE);

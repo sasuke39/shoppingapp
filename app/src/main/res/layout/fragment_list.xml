@@ -1,4 +1,4 @@
-<androidx.percentlayout.widget.PercentFrameLayout
+<androidx.percentlayout.widget.PercentRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -16,8 +16,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_right"
-        android:layout_width="0dp"
+        android:layout_width="198dp"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/lv_left"
+        android:layout_toEndOf="@id/lv_left"
         app:layout_widthPercent="78%" />
-    </androidx.percentlayout.widget.PercentFrameLayout>
+
+</androidx.percentlayout.widget.PercentRelativeLayout>

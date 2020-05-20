@@ -9,10 +9,6 @@ import android.widget.TextView;
 
 import com.example.shopping.R;
 
-
-/**
- * Created by Administrator on 2016/10/3.
- */
 public class TypeLeftAdapter extends BaseAdapter {
     private Context mContext;
     private int mSelect = 0;//选中项
@@ -39,6 +35,10 @@ public class TypeLeftAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        /**
+         * 设置单个view的title
+         * setTag(holder)
+         */
         ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_type, null);
@@ -68,7 +68,7 @@ public class TypeLeftAdapter extends BaseAdapter {
         }
     }
 
-    static class ViewHolder {
+    private static class ViewHolder {
         private TextView tv_name;
     }
 }

@@ -40,7 +40,7 @@ public class TagFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        getDataFromNet();
+//        getDataFromNet();
 
     }
 

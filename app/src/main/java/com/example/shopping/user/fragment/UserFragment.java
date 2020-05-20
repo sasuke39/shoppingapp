@@ -1,55 +1,24 @@
-package com.example.shopping.user.fragment;//package com.example.shopping.user.fragment;
-//
-//import android.util.Log;
-//import android.view.Gravity;
-//import android.view.View;
-//import android.widget.TextView;
-//
-//import com.example.shopping.base.BaseFragment;
-//
-//import static android.content.ContentValues.TAG;
-//
-///**
-// * 用户
-// */
-//
-//public class UserFragment extends BaseFragment {
-//
-//    private TextView textView;
-//
-//    @Override
-//    public View initView() {
-//        Log.e(TAG,"用户页面的Fragment ui被初始化");
-//
-//        textView = new TextView(my_Context);
-//        textView.setGravity(Gravity.CENTER);
-//        textView.setTextSize(25);
-//        return textView;
-//
-//    }
-//
-//    @Override
-//    public void initData() {
-//        super.initData();
-//        Log.e(TAG,"用户页面的Fragment 数据被初始化");
-//        textView.setText("用户页面内容");
-//    }
-//}
-
+package com.example.shopping.user.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.example.shopping.R;
 import com.example.shopping.app.LoginActivity;
+import com.example.shopping.app.MainActivity;
 import com.example.shopping.base.BaseFragment;
-
+import com.example.shopping.user.bean.UserBean;
+import com.google.gson.Gson;
 
 public class UserFragment extends BaseFragment implements View.OnClickListener {
     private ImageButton ibUserIconAvator;
@@ -72,6 +41,14 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private ImageButton ibUserSetting;
     private ImageButton ibUserMessage;
     private ScrollView scrollView;
+
+    private Button userShutdown;
+    private Boolean ifLogined= false;
+
+
+    private UserBean.MedUserBean medUserBean;
+
+    private Boolean IsLogined=Boolean.FALSE;
 
     /**
      * Find the Views in the layout<br />
@@ -102,7 +79,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         ibUserSetting = (ImageButton) view.findViewById(R.id.ib_user_setting);
         ibUserMessage = (ImageButton) view.findViewById(R.id.ib_user_message);
         scrollView = (ScrollView) view.findViewById(R.id.scrollview);
+        userShutdown = view.findViewById(R.id.user_shutdown);
 
+        userShutdown.setOnClickListener(this);
         ibUserIconAvator.setOnClickListener(this);
         ibUserSetting.setOnClickListener(this);
         ibUserMessage.setOnClickListener(this);
@@ -117,17 +96,31 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == ibUserIconAvator) {
-            Intent intent = new Intent(my_Context, LoginActivity.class);
-            startActivityForResult(intent, 0);
-            startActivity(intent);
-
+            if (!IsLogined) {
+                Intent intent = new Intent(my_Context, LoginActivity.class);
+                startActivityForResult(intent, 0);
+            }
         } else if (v == ibUserSetting) {
             Toast.makeText(my_Context, "设置", Toast.LENGTH_SHORT).show();
         } else if (v == ibUserMessage) {
 //            Intent intent = new Intent(my_Context, MessageCenterActivity.class);
 //            startActivity(intent);
+        }else if (v == userShutdown){
+            if (IsLogined) {
+                shutDownUser();
+            }else Toast.makeText(my_Context, "请先登录哦！", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void shutDownUser() {
+
+
+        Intent intent10=new Intent(getActivity(), MainActivity.class);
+        intent10.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent10);
+
+    }
+
 
 
     @Override
@@ -161,7 +154,24 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         });
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode==1) {
+            Log.i("是否执行", "999");
+            String str = data.getExtras().getString("MED_USER");
+            medUserBean = new Gson().fromJson(str, UserBean.MedUserBean.class);
+//            System.out.println(medUserBean);
+            IntoData(medUserBean);
+        }else if(resultCode==2) {
+            String str = data.getExtras().getString("MSG");
+            Toast.makeText(my_Context,str , Toast.LENGTH_SHORT).show();
+        }
 
+    }
+    public void IntoData(UserBean.MedUserBean medUserBean){
+        tvUsername.setText(medUserBean.getUsername());
+        IsLogined=Boolean.TRUE;
+    }
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        if (requestCode == 0) {

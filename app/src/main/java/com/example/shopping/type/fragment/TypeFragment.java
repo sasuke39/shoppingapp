@@ -58,7 +58,9 @@ public class TypeFragment extends BaseFragment {
         segmentTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                switchFragment(tempFragment, fragmentList.get(position));
+//                switchFragment(tempFragment, fragmentList.get(position));
+                Toast.makeText(my_Context, "had clicked", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -71,7 +73,9 @@ public class TypeFragment extends BaseFragment {
     }
 
 
-
+    /**
+     * protected void onResume() 在 Activity 从 Pause 状态转换到 Active 状态时被调用
+     */
     @Override
     public void onResume() {
         super.onResume();

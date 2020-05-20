@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.shopping.R;
-import com.example.shopping.utils.Constants;
+import com.example.shopping.user.bean.UserBean;
+import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -32,6 +34,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private ImageButton ib_weibo;
     private ImageButton ib_qq;
     private ImageButton ib_wechat;
+
+    private Button btnRegister;
 
     private int isVisble;
     private String screen_name;
@@ -54,7 +58,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         ib_weibo = (ImageButton) findViewById(R.id.ib_weibo);
         ib_qq = (ImageButton) findViewById(R.id.ib_qq);
         ib_wechat = (ImageButton) findViewById(R.id.ib_wechat);
+        btnRegister=findViewById(R.id.btn_register);
 
+        btnRegister.setOnClickListener(this);
         ibLoginBack.setOnClickListener(this);
         ibLoginVisible.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
@@ -83,8 +89,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 etLoginPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
             }
-        } else if (v == btnLogin) {
-            Login();
+        }else if (v==btnRegister)
+        {
+            startRegisterActivity();
+        }else if (v == btnLogin) {
+            ifLogin();
+//            UserBean.MedUserBean medUserBean = new UserBean.MedUserBean();
+//            medUserBean.setId(1);
+//            medUserBean.setPassword("123123..");
+//            medUserBean.setPhoneNumber("165165");
+//            medUserBean.setUsername("zzz");
+//            backToHome(medUserBean);
         } else if (v == ib_weibo) {
 //            mShareAPI = UMShareAPI.get(this);
 //            mShareAPI.doOauthVerify(this, SHARE_MEDIA.SINA, umAuthListener);
@@ -95,6 +110,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 //            mShareAPI = UMShareAPI.get(this);
 //            mShareAPI.doOauthVerify(this, SHARE_MEDIA.WEIXIN, umAuthListener);
         }
+    }
+
+    private void startRegisterActivity() {
+
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivityForResult(intent, 3);
+
     }
 
     @Override
@@ -114,17 +136,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
 
-    private void Login() {
+    private void ifLogin() {
 
         final String username = String.valueOf(etLoginPhone.getText());
         final String password = String.valueOf(etLoginPwd.getText());
         Log.e("USERNAME", String.valueOf(username));
         Log.e("PASSWORD", String.valueOf(password));
-        String url = Constants.LOGIN_URL;
+//        String url = Constants.LOGIN_URL;
+        String url = "http://192.168.5.1/springall/medUser/login";
         OkHttpUtils
                 .post()
                 .url(url)
-                .addParams("username", username)
+                .addParams("phone", username)
                 .addParams("password", password)
                 .build()
                 .execute(new StringCallback()
@@ -149,7 +172,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG,"登陆请求成功!"+response);
+                        Log.e(TAG,"登陆请求成功!");
 
                         login(response);
 
@@ -160,9 +183,30 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 
     private void login(String response) {
+        UserBean userBean = JSON.parseObject(response, UserBean.class);
+            UserBean.MedUserBean medUserBean = userBean.getMed_user();
+            /**
+             * 登录逻辑处理
+             */
+        System.out.println(userBean.getCode());
+        System.out.println(medUserBean);
 
-        /**
-         * 登录逻辑处理
-         */
+        backToHome(userBean);
+
+    }
+
+
+    private void backToHome(UserBean userBean){
+        Intent intent = new Intent();
+        if (userBean.getCode().equals("200")) {
+            intent.putExtra("MED_USER", new Gson().toJson(userBean.getMed_user()));
+            setResult(1, intent);
+            System.out.println("ITs 200");
+        }else {
+            System.out.println("ITS 500");
+            intent.putExtra("MSG", "failed!");
+            setResult(2,intent);
+        }
+        finish();
     }
 }

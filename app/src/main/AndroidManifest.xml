@@ -24,12 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.MainActivity">
-        </activity>
-        <activity android:name=".app.GoodsInfoActivity">
-        </activity>
-        <activity android:name=".app.LoginActivity">
-        </activity>
+        <activity android:name=".app.MainActivity"/>
+        <activity android:name=".app.GoodsInfoActivity"/>
+        <activity android:name=".app.LoginActivity"/>
+        <activity android:name=".app.RegisterActivity"/>
+
+
+        <!-- 配置Service组件,同时配置一个action -->
+        <service android:name=".app.UserService"/>
     </application>
 
 </manifest>

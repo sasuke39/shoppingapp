@@ -48,7 +48,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     private  LayoutInflater inflater;
     private  Context my_context;
     private  MedreslutBeanData.ResultBean resultBean;
-    private MedreslutBeanData.ResultMedcineBean resultMedcineBean;
+    private  MedreslutBeanData.ResultMedcineBean resultMedcineBean;
 
 
     /**
