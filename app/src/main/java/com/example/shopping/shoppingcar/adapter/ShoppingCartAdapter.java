@@ -198,7 +198,15 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return totalPrice;
     }
 
-
+    /**
+     * 1.getItemCount
+     * 2.onCreatViewHolder
+     * 3.viewHolder
+     * 4.onBindViewHolder
+     * @param parent
+     * @param viewType
+     * @return
+     */
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -28,10 +28,10 @@
         <activity android:name=".app.GoodsInfoActivity"/>
         <activity android:name=".app.LoginActivity"/>
         <activity android:name=".app.RegisterActivity"/>
-
-
         <!-- 配置Service组件,同时配置一个action -->
         <service android:name=".app.UserService"/>
+        <activity android:name=".app.OrderActivity"/>
+
     </application>
 
 </manifest>

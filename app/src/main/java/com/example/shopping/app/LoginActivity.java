@@ -125,7 +125,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         findViews();
 
-
     }
 
 

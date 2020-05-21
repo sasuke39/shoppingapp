@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.example.shopping.R;
 import com.example.shopping.app.LoginActivity;
 import com.example.shopping.app.MainActivity;
+import com.example.shopping.app.OrderActivity;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.user.bean.UserBean;
 import com.google.gson.Gson;
@@ -81,6 +82,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         scrollView = (ScrollView) view.findViewById(R.id.scrollview);
         userShutdown = view.findViewById(R.id.user_shutdown);
 
+
+        tvAllOrder.setOnClickListener(this);
         userShutdown.setOnClickListener(this);
         ibUserIconAvator.setOnClickListener(this);
         ibUserSetting.setOnClickListener(this);
@@ -109,7 +112,14 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             if (IsLogined) {
                 shutDownUser();
             }else Toast.makeText(my_Context, "请先登录哦！", Toast.LENGTH_SHORT).show();
+        }else if (v==tvAllOrder){
+            startOrdersActivity();
         }
+    }
+
+    private void startOrdersActivity() {
+        Intent intent = new Intent(getActivity(), OrderActivity.class);
+        startActivity(intent);
     }
 
     private void shutDownUser() {

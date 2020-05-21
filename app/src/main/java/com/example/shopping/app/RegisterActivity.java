@@ -71,6 +71,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener  
     @Override
     public void onClick(View v) {
         if ( v == ibLoginBack ) {
+            finish();
             // Handle clicks for ibLoginBack
         } else if ( v == ibLoginVisible ) {
             // Handle clicks for ibLoginVisible
