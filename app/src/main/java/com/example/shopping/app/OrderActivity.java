@@ -2,11 +2,11 @@ package com.example.shopping.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,11 +34,12 @@ public class OrderActivity extends Activity implements View.OnClickListener {
     private TextView tvOrderEdit;
     private RecyclerView recyclerview;
     private LinearLayout llDelete;
-    private CheckBox cbAll;
     private Button btnDelete;
     private ImageButton ibMyOrderBack;
     private myOrderAdapter adapter;
     private Context context;
+
+    private String  userId;
 
     //编辑状态
     private static final int ACTION_EDIT = 1;
@@ -52,10 +53,23 @@ public class OrderActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         context=getContext();
+        getUser();
         findViews();
         initListener();
         getOrderJson();
     }
+
+    private void getUser() {
+        Intent intent = getIntent();
+        String userBeanId = intent.getStringExtra("userBeanId");
+        if (userBeanId==null){
+            finish();
+        }
+        userId = userBeanId;
+        System.out.println(userId);
+
+    }
+
 
     private void getOrderJson() {
 
@@ -64,7 +78,7 @@ public class OrderActivity extends Activity implements View.OnClickListener {
         OkHttpUtils
                 .post()
                 .url(url)
-//                .addParams("phone", username)
+                .addParams("id", userId)
 //                .addParams("password", password)
                 .build()
                 .execute(new StringCallback()
@@ -111,9 +125,11 @@ public class OrderActivity extends Activity implements View.OnClickListener {
 
         if (med_order!=null&&med_order.size()>0){
             tvOrderEdit.setVisibility(View.VISIBLE);
-            adapter = new myOrderAdapter(context,med_order,cbAll);
+            adapter = new myOrderAdapter(context,med_order);
             recyclerview.setAdapter(adapter);
-            recyclerview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+            LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+            recyclerview.setLayoutManager(layout);
+
         }else {
             tvOrderEdit.setVisibility(View.GONE);
         }
@@ -136,7 +152,6 @@ public class OrderActivity extends Activity implements View.OnClickListener {
         tvOrderEdit = (TextView)findViewById( R.id.tv_order_edit );
         recyclerview = (RecyclerView)findViewById( R.id.recyclerview );
         llDelete = (LinearLayout)findViewById( R.id.ll_delete );
-        cbAll = (CheckBox)findViewById( R.id.cb_all );
         btnDelete = (Button)findViewById( R.id.btn_delete );
         ibMyOrderBack = findViewById(R.id.ib_myOrder_back);
 
@@ -156,6 +171,7 @@ public class OrderActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if ( v == btnDelete ) {
             // Handle clicks for btnDelete
+            recyclerview.invalidate();
         } else if (v==ibMyOrderBack){
             finish();
         }else if (v==tvOrderEdit){
@@ -189,8 +205,6 @@ public class OrderActivity extends Activity implements View.OnClickListener {
         tvOrderEdit.setText("管理");
         //2.全部变成勾选
         if (adapter != null) {
-//            adapter.checkAll_none(true);
-//            adapter.checkAll();
 
         }
         //3.删除视图显示
@@ -203,11 +217,10 @@ public class OrderActivity extends Activity implements View.OnClickListener {
         tvOrderEdit.setTag(ACTION_COMPLETE);
         tvOrderEdit.setText("完成");
         //2.变成非勾选
-        if (adapter != null) {
-//            adapter.checkAll_none(false);
-//            adapter.checkAll();
-        }
         //3.删除视图显示
+        if (adapter != null) {
+
+        }
         llDelete.setVisibility(View.VISIBLE);
 
 

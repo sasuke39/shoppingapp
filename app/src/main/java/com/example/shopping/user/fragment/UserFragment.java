@@ -44,7 +44,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private ScrollView scrollView;
 
     private Button userShutdown;
-    private Boolean ifLogined= false;
 
 
     private UserBean.MedUserBean medUserBean;
@@ -113,13 +112,19 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 shutDownUser();
             }else Toast.makeText(my_Context, "请先登录哦！", Toast.LENGTH_SHORT).show();
         }else if (v==tvAllOrder){
+            System.out.println(IsLogined);
             startOrdersActivity();
         }
     }
 
     private void startOrdersActivity() {
-        Intent intent = new Intent(getActivity(), OrderActivity.class);
-        startActivity(intent);
+        if (IsLogined) {
+            System.out.println(medUserBean);
+            Intent intent = new Intent(this.getActivity(), OrderActivity.class);
+            intent.putExtra("userBeanId",String.valueOf(medUserBean.getId()));
+            startActivity(intent);
+        }else Toast.makeText(my_Context, "请先登录哦！", Toast.LENGTH_SHORT).show();
+
     }
 
     private void shutDownUser() {
@@ -170,7 +175,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             Log.i("是否执行", "999");
             String str = data.getExtras().getString("MED_USER");
             medUserBean = new Gson().fromJson(str, UserBean.MedUserBean.class);
-//            System.out.println(medUserBean);
             IntoData(medUserBean);
         }else if(resultCode==2) {
             String str = data.getExtras().getString("MSG");
@@ -182,32 +186,5 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         tvUsername.setText(medUserBean.getUsername());
         IsLogined=Boolean.TRUE;
     }
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == 0) {
-//            String screen_name = data.getStringExtra("screen_name");
-//            String profile_image_url = data.getStringExtra("profile_image_url");
-//
-//            Picasso.with(my_Context).load(profile_image_url).transform(new Transformation() {
-//                @Override
-//                public Bitmap transform(Bitmap bitmap) {
-//                    //先对图片进行压缩
-////                Bitmap zoom = BitmapUtils.zoom(bitmap, DensityUtil.dip2px(my_Context, 62), DensityUtil.dip2px(my_Context, 62));
-//                    Bitmap zoom = BitmapUtils.zoom(bitmap, 90, 90);
-//                    //对请求回来的Bitmap进行圆形处理
-//                    Bitmap ciceBitMap = BitmapUtils.circleBitmap(zoom);
-//                    bitmap.recycle();//必须队更改之前的进行回收
-//                    return ciceBitMap;
-//                }
-//
-//                @Override
-//                public String key() {
-//                    return "";
-//                }
-//            }).into(ibUserIconAvator);
-//
-//            tvUsername.setText(screen_name);
-//        }
-//    }
 }
 

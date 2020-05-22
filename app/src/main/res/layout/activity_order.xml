@@ -70,22 +70,8 @@
                 android:background="#fff"
                 android:orientation="horizontal"
                 android:padding="5dp"
+                android:gravity="right"
                 android:visibility="gone">
-
-                <CheckBox
-                    android:id="@+id/cb_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/checkbox_selector"
-                    android:drawablePadding="10dp"
-                    android:padding="10dp"
-                    android:paddingLeft="0dp"
-                    android:text="全选"
-                    android:textColor="#303235"
-                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_delete"

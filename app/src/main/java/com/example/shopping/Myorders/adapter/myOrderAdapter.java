@@ -23,16 +23,13 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
     private final Context mContext;
     private final List<Orderbean.MedOrderBean> datas;
     //完成状态下的删除CheckBox
-    private final CheckBox cbAll;
+    private Boolean ifshowselected =Boolean.FALSE;
 
 
-    public myOrderAdapter(Context context, List<Orderbean.MedOrderBean> med_order, CheckBox cbAll) {
+    public myOrderAdapter(Context context, List<Orderbean.MedOrderBean> med_order) {
         datas=med_order;
         mContext=context;
-        this.cbAll=cbAll;
         setListener();
-        checkAll();
-
     }
 
 
@@ -50,7 +47,7 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
 
         final Orderbean.MedOrderBean orderBean = datas.get(position);
         Orderbean.MedOrderBean.MedicineBean medicine = orderBean.getMedicine();
-        holder.cbGov.setChecked(false);
+        holder.cbGov.setChecked(orderBean.getSelectEd());
         Glide.with(mContext).load(Constants.IMG_Med + medicine.getImg_url()).into(holder.ivGov);
         holder.tvDescGov.setText(medicine.getProduct_name());
         holder.tvPriceGov.setText("￥"+medicine.getCover_price());
@@ -137,50 +134,18 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
         setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                //1.根据位置找到对应的Bean对象
-//                GoodsBean goodsBean = datas.get(position);
-//                //2.设置取反状态
-//                goodsBean.setSelected(!goodsBean.isSelected());
-//                //3.刷新状态
-//                notifyItemChanged(position);
-//                //4.校验是否全选
-//                checkAll();
-//                //5.重新计算总价格
-//                showTotalPrice();
+                //1.根据位置找到对应的Bean对象
+                Orderbean.MedOrderBean orderbean = datas.get(position);
+                //2.设置取反状态
+                orderbean.setSelectEd(!orderbean.getSelectEd());
+                //3.刷新状态
+
+                notifyItemChanged(position);
+                //4.校验是否全选
             }
         });
     }
 
-    /**
-     * 1.货物不能为空
-     * 2.遍历数据 只要有一个没有选中 全选设置为false
-     * 3.有一个选中 number加一
-     * 4.判断number是不是全部货物的数量 再设置全选状态
-     */
-    public void checkAll() {
-//        if(datas != null && datas.size() >0){
-//            int number = 0;
-//            for (int i=0;i<datas.size();i++){
-//                Orderbean.MedOrderBean orderBean = datas.get(i);
-//                if(!orderBean.isSelected()){
-//                    //非全选
-//                    orderBean.setChecked(false);
-//                    cbAll.setChecked(false);
-//                }else{
-//                    //选中的
-//                    number ++;
-//                }
-//            }
-//
-//            if(number == datas.size()){
-//                //全选
-//                checkboxAll.setChecked(true);
-//                cbAll.setChecked(true);
-//            }
-//        }else{
-//            checkboxAll.setChecked(false);
-//            cbAll.setChecked(false);
-//        }
-    }
+
 
 }

@@ -54,6 +54,16 @@ public class Orderbean implements Serializable {
         private MedUserBean med_user;
         private MedicineBean medicine;
         private int uid;
+        private Boolean selectEd=Boolean.FALSE;
+
+        public Boolean getSelectEd() {
+            return selectEd;
+        }
+
+        public void setSelectEd(Boolean selectEd) {
+            this.selectEd = selectEd;
+        }
+
 
         public int getGoodsid() {
             return goodsid;
