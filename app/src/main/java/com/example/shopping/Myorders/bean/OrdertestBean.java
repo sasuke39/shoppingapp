@@ -3,18 +3,20 @@ package com.example.shopping.Myorders.bean;
 import java.io.Serializable;
 import java.util.List;
 
-public class Orderbean implements Serializable {
+public class OrdertestBean implements Serializable {
 
 
     /**
-     * msg : get successfully!
+     * msg : get success
+     * MedOrder : [{"createTime":"2020-05-23 12:50:06","goodsid":10,"id":1,"medicine":{"cover_price":29,"details":"抗生素类药，功效主要是消除炎症，主治上、下呼吸道感染下呼吸道感染，各种皮肤和软组织感染，泌尿生殖道感染，急性单纯性淋病。","img_url":"timg-2.jpeg","product_id":10,"product_name":"阿莫西林","type":"呼吸系统"},"uid":1},{"createTime":"2020-05-23 12:50:06","goodsid":15,"id":2,"medicine":{"cover_price":159,"details":"祛斑舒缓强效装：洁面乳+滋养面膜+柔肤水+修复霜皮宝修护中药护肤套装，具有500年品牌质量保障，集合清洁皮肤，补水保湿，舒缓修复肌肤，淡化色素沉着。一套护理大概2个月，增强皮肤屏障，防止色斑再生，为肌肤保湿滋养、舒缓修复肌肤，减少外部刺激。联合护肤，让肌肤保持年轻活力","img_url":"CgAgFVzeVbGAPz5BAABcPWGw0O8472.jpg","product_id":15,"product_name":"舒缓滋养面膜","type":"五官科药"},"uid":1}]
      * code : 200
-     * med_order : [{"goodsid":10,"id":1,"med_user":{"id":1,"password":"123123..","phoneNumber":"111231","username":"zzz"},"medicine":{"cover_price":29,"details":"抗生素类药，功效主要是消除炎症，主治上、下呼吸道感染下呼吸道感染，各种皮肤和软组织感染，泌尿生殖道感染，急性单纯性淋病。","img_url":"timg-2.jpeg","product_id":10,"product_name":"阿莫西林","type":"呼吸系统"},"uid":1}]
+     * userId : 1
      */
 
     private String msg;
-    private String code;
-    private List<MedOrderBean> med_order;
+    private String  code;
+    private int userId;
+    private List<MedOrderBean> MedOrder;
 
     public String getMsg() {
         return msg;
@@ -32,26 +34,34 @@ public class Orderbean implements Serializable {
         this.code = code;
     }
 
-    public List<MedOrderBean> getMed_order() {
-        return med_order;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setMed_order(List<MedOrderBean> med_order) {
-        this.med_order = med_order;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public List<MedOrderBean> getMedOrder() {
+        return MedOrder;
+    }
+
+    public void setMedOrder(List<MedOrderBean> MedOrder) {
+        this.MedOrder = MedOrder;
     }
 
     public static class MedOrderBean {
         /**
+         * createTime : 2020-05-23 12:50:06
          * goodsid : 10
          * id : 1
-         * med_user : {"id":1,"password":"123123..","phoneNumber":"111231","username":"zzz"}
          * medicine : {"cover_price":29,"details":"抗生素类药，功效主要是消除炎症，主治上、下呼吸道感染下呼吸道感染，各种皮肤和软组织感染，泌尿生殖道感染，急性单纯性淋病。","img_url":"timg-2.jpeg","product_id":10,"product_name":"阿莫西林","type":"呼吸系统"}
          * uid : 1
          */
 
+        private String createTime;
         private int goodsid;
         private int id;
-        private MedUserBean med_user;
         private MedicineBean medicine;
         private int uid;
         private Boolean selectEd=Boolean.FALSE;
@@ -64,6 +74,14 @@ public class Orderbean implements Serializable {
             this.selectEd = selectEd;
         }
 
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
 
         public int getGoodsid() {
             return goodsid;
@@ -81,14 +99,6 @@ public class Orderbean implements Serializable {
             this.id = id;
         }
 
-        public MedUserBean getMed_user() {
-            return med_user;
-        }
-
-        public void setMed_user(MedUserBean med_user) {
-            this.med_user = med_user;
-        }
-
         public MedicineBean getMedicine() {
             return medicine;
         }
@@ -103,65 +113,6 @@ public class Orderbean implements Serializable {
 
         public void setUid(int uid) {
             this.uid = uid;
-
-        }
-
-        @Override
-        public String toString() {
-            return "MedOrderBean{" +
-                    "goodsid=" + goodsid +
-                    ", id=" + id +
-                    ", med_user=" + med_user +
-                    ", medicine=" + medicine +
-                    ", uid=" + uid +
-                    ", selectEd=" + selectEd +
-                    '}';
-        }
-
-        public static class MedUserBean {
-            /**
-             * id : 1
-             * password : 123123..
-             * phoneNumber : 111231
-             * username : zzz
-             */
-
-            private int id;
-            private String password;
-            private String phoneNumber;
-            private String username;
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getPassword() {
-                return password;
-            }
-
-            public void setPassword(String password) {
-                this.password = password;
-            }
-
-            public String getPhoneNumber() {
-                return phoneNumber;
-            }
-
-            public void setPhoneNumber(String phoneNumber) {
-                this.phoneNumber = phoneNumber;
-            }
-
-            public String getUsername() {
-                return username;
-            }
-
-            public void setUsername(String username) {
-                this.username = username;
-            }
         }
 
         public static class MedicineBean {

@@ -76,6 +76,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 GoodsBean goodsBean = datas.get(position);
                 //2.设置取反状态
                 goodsBean.setSelected(!goodsBean.isSelected());
+
+                CartStorage.getInstance().updateData(goodsBean);
                 //3.刷新状态
                 notifyItemChanged(position);
                 //4.校验是否全选
@@ -289,6 +291,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 public void onClick(View v) {
                     if(onItemClickListener != null){
                         onItemClickListener.onItemClick(getLayoutPosition());
+
                     }
                 }
             });
@@ -304,6 +307,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
          * @param position
          */
        public void  onItemClick(int position);
+
     }
 
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.example.shopping.R;
 import com.example.shopping.user.bean.UserBean;
+import com.example.shopping.utils.Constants;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -142,7 +143,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         Log.e("USERNAME", String.valueOf(username));
         Log.e("PASSWORD", String.valueOf(password));
 //        String url = Constants.LOGIN_URL;
-        String url = "http://192.168.5.1/springall/medUser/login";
+        String url = Constants.TEST_URL+"medUser/login";
+
         OkHttpUtils
                 .post()
                 .url(url)
@@ -198,6 +200,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void backToHome(UserBean userBean){
         Intent intent = new Intent();
         if (userBean.getCode().equals("200")) {
+            MyApplication.setIfLogin(true);
             intent.putExtra("MED_USER", new Gson().toJson(userBean.getMed_user()));
             setResult(1, intent);
             System.out.println("ITs 200");

@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#ed3f3f"
-                    android:text="去结算"
+                    android:text="结算"
                     android:textColor="#fff" />
             </LinearLayout>
 

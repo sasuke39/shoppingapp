@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.shopping.Myorders.adapter.myOrderAdapter;
 import com.example.shopping.Myorders.bean.Orderbean;
 import com.example.shopping.R;
+import com.example.shopping.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -74,11 +75,11 @@ public class OrderActivity extends Activity implements View.OnClickListener {
     private void getOrderJson() {
 
 //        String url = Constants.LOGIN_URL;
-        String url = "http://192.168.5.1/springall/Medicine/getOrderJson";
+        String url = Constants.TEST_URL+"medUser/MedOrderByUid";
         OkHttpUtils
                 .post()
                 .url(url)
-                .addParams("id", userId)
+                .addParams("uid", userId)
 //                .addParams("password", password)
                 .build()
                 .execute(new StringCallback()

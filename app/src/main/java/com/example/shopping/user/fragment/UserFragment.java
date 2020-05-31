@@ -16,10 +16,13 @@ import androidx.annotation.Nullable;
 import com.example.shopping.R;
 import com.example.shopping.app.LoginActivity;
 import com.example.shopping.app.MainActivity;
+import com.example.shopping.app.MyApplication;
 import com.example.shopping.app.OrderActivity;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.user.bean.UserBean;
 import com.google.gson.Gson;
+
+import static com.example.shopping.app.MyApplication.setUser;
 
 public class UserFragment extends BaseFragment implements View.OnClickListener {
     private ImageButton ibUserIconAvator;
@@ -48,7 +51,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     private UserBean.MedUserBean medUserBean;
 
-    private Boolean IsLogined=Boolean.FALSE;
 
     /**
      * Find the Views in the layout<br />
@@ -98,7 +100,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == ibUserIconAvator) {
-            if (!IsLogined) {
+            if (!MyApplication.isIfLogin()) {
                 Intent intent = new Intent(my_Context, LoginActivity.class);
                 startActivityForResult(intent, 0);
             }
@@ -108,17 +110,17 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 //            Intent intent = new Intent(my_Context, MessageCenterActivity.class);
 //            startActivity(intent);
         }else if (v == userShutdown){
-            if (IsLogined) {
+            if (MyApplication.isIfLogin()) {
                 shutDownUser();
             }else Toast.makeText(my_Context, "请先登录哦！", Toast.LENGTH_SHORT).show();
         }else if (v==tvAllOrder){
-            System.out.println(IsLogined);
+            System.out.println(!MyApplication.isIfLogin());
             startOrdersActivity();
         }
     }
 
     private void startOrdersActivity() {
-        if (IsLogined) {
+        if (MyApplication.isIfLogin()) {
             System.out.println(medUserBean);
             Intent intent = new Intent(this.getActivity(), OrderActivity.class);
             intent.putExtra("userBeanId",String.valueOf(medUserBean.getId()));
@@ -131,6 +133,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
 
         Intent intent10=new Intent(getActivity(), MainActivity.class);
+        MyApplication.setIfLogin(false);
         intent10.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent10);
 
@@ -176,6 +179,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             String str = data.getExtras().getString("MED_USER");
             medUserBean = new Gson().fromJson(str, UserBean.MedUserBean.class);
             IntoData(medUserBean);
+            setUser(medUserBean);
         }else if(resultCode==2) {
             String str = data.getExtras().getString("MSG");
             Toast.makeText(my_Context,str , Toast.LENGTH_SHORT).show();
@@ -184,7 +188,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     }
     public void IntoData(UserBean.MedUserBean medUserBean){
         tvUsername.setText(medUserBean.getUsername());
-        IsLogined=Boolean.TRUE;
+        MyApplication.setIfLogin(true);
     }
 }
 

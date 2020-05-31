@@ -2,16 +2,22 @@ package com.example.shopping.utils;
 
 public class Constants {
 
-    public static String Base_URL ="http://3i017441z6.zicp.vip/atguigu";
+    public static String Base_URL ="http://192.168.5.1:8081/atguigu";
 
     public static String HOME_URL=Base_URL+"/json/HOME_URL1.json";
     public static String LOGIN_URL=Base_URL+"/login";
     /**
      * 图片路径
      */
+
+    public static String home1="http://192.168.5.1:8081/Medapp/HOME_URL1.json";
     public static String IMG_URL=Base_URL+"/img";
 
     public static String IMG_Med="http://3i017441z6.zicp.vip/med_img/";
+
+    public static String IMG_Med_TEST="http://192.168.5.1:8081/med_img/";
+
+    public static String TEST_URL="http://192.168.5.1/";
 
 
     private static final String BASE_URL_JSON = Base_URL+"/json/";

@@ -47,8 +47,9 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
 
         final Orderbean.MedOrderBean orderBean = datas.get(position);
         Orderbean.MedOrderBean.MedicineBean medicine = orderBean.getMedicine();
+        System.out.println(orderBean);
         holder.cbGov.setChecked(orderBean.getSelectEd());
-        Glide.with(mContext).load(Constants.IMG_Med + medicine.getImg_url()).into(holder.ivGov);
+        Glide.with(mContext).load(Constants.IMG_Med_TEST + medicine.getImg_url()).into(holder.ivGov);
         holder.tvDescGov.setText(medicine.getProduct_name());
         holder.tvPriceGov.setText("￥"+medicine.getCover_price());
 

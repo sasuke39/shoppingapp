@@ -1,19 +1,31 @@
 package com.example.shopping.app;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-
-//import com.zhy.http.okhttp.OkHttpUtils;
-
+import com.example.shopping.user.bean.UserBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 
+//import com.zhy.http.okhttp.OkHttpUtils;
+
 public class MyApplication extends Application {
+    @SuppressLint("StaticFieldLeak")
     private static Context my_context;
+    private static UserBean.MedUserBean AppUser;
+    private static boolean IfLogin=false;
+
+    public static boolean isIfLogin() {
+        return IfLogin;
+    }
+
+    public static void setIfLogin(boolean ifLogin) {
+        IfLogin = ifLogin;
+    }
 
     @Override
     public void onCreate() {
@@ -41,5 +53,12 @@ public class MyApplication extends Application {
 
     public static Context getContext() {
         return my_context;
+    }
+
+    public static UserBean.MedUserBean getUSer(){
+        return AppUser;
+    }
+    public static void setUser(UserBean.MedUserBean appUser){
+        AppUser = appUser;
     }
 }

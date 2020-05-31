@@ -74,7 +74,8 @@ public class HomeFragment extends BaseFragment {
      * 成功回调解析函数
      */
     private void getDataFromNet() {
-        String url = Constants.HOME_URL;
+//        String url = Constants.HOME_URL;
+        String url = Constants.home1;
         OkHttpUtils
                 .get()
                 .url(url)
