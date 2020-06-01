@@ -23,7 +23,7 @@
             android:id="@+id/iv_gov"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/new_img_loading_1"
+            android:background="@drawable/shangcheng"
             android:scaleType="fitXY" />
 
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="2"
-                android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 （i5-5200U 4G 500G R5-M230 1G独显 蓝牙 Win8.1 黑色）"
+                android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 "
                 android:textColor="#404040"
                 android:textSize="14sp" />
 

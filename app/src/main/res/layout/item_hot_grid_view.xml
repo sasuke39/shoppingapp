@@ -13,7 +13,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_gravity="center"
-        android:background="@drawable/new_img_loading_2" />
+        android:background="@drawable/shangcheng" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -23,7 +23,7 @@
         android:ellipsize="end"
         android:lines="2"
         android:padding="10dp"
-        android:text="【智趣屋】DIY小屋盒子剧场 手工拼装房子 模型玩具创意礼品 送工具"
+        android:text="空"
         android:textColor="#000" />
 
     <TextView
@@ -32,6 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginTop="3dp"
-        android:text="￥88.00"
+        android:text="￥99999.99"
         android:textColor="#ff4242" />
 </LinearLayout>

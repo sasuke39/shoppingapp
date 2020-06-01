@@ -1,33 +1,38 @@
 package com.example.shopping.shoppingcar.Bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class SimOrderBean implements Serializable {
 
+    int id;
     int UserId;
-    List<Goods> goodsList;
+    int sid;
+    int goodsNumber;
+    Double OnePrice;
+    String UserAddress;
     String CreateTime;
     Double Total;
-    String AllGoods;
 
     @Override
     public String toString() {
         return "SimOrderBean{" +
-                "UserId=" + UserId +
-                ", goodsList=" + goodsList +
+                "id=" + id +
+                ", UserId=" + UserId +
+                ", sid=" + sid +
+                ", goodsNumber=" + goodsNumber +
+                ", OnePrice=" + OnePrice +
+                ", UserAddress='" + UserAddress + '\'' +
                 ", CreateTime='" + CreateTime + '\'' +
                 ", Total=" + Total +
-                ", AllGoods='" + AllGoods + '\'' +
                 '}';
     }
 
-    public String getAllGoods() {
-        return AllGoods;
+    public int getId() {
+        return id;
     }
 
-    public void setAllGoods(String allGoods) {
-        AllGoods = allGoods;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUserId() {
@@ -38,7 +43,37 @@ public class SimOrderBean implements Serializable {
         UserId = userId;
     }
 
+    public int getSid() {
+        return sid;
+    }
 
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
+
+    public int getGoodsNumber() {
+        return goodsNumber;
+    }
+
+    public void setGoodsNumber(int goodsNumber) {
+        this.goodsNumber = goodsNumber;
+    }
+
+    public Double getOnePrice() {
+        return OnePrice;
+    }
+
+    public void setOnePrice(Double onePrice) {
+        OnePrice = onePrice;
+    }
+
+    public String getUserAddress() {
+        return UserAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        UserAddress = userAddress;
+    }
 
     public String getCreateTime() {
         return CreateTime;
@@ -54,13 +89,5 @@ public class SimOrderBean implements Serializable {
 
     public void setTotal(Double total) {
         Total = total;
-    }
-
-    public List<Goods> getGoodsList() {
-        return goodsList;
-    }
-
-    public void setGoodsList(List<Goods> goodsList) {
-        this.goodsList = goodsList;
     }
 }

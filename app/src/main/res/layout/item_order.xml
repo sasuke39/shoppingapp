@@ -24,13 +24,13 @@
         <ImageView
             android:id="@+id/iv_gov"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:background="@drawable/new_img_loading_1"
             android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:orientation="vertical">
 
@@ -39,27 +39,81 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:lines="3"
-                android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 （i5-5200U 4G 500G R5-M230 1G独显 蓝牙 Win8.1 黑色）"
+                android:lines="2"
+                android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 "
                 android:textColor="#404040"
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginEnd="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:gravity="left"
                 tools:ignore="RtlHardcoded">
 
                 <TextView
                     android:id="@+id/tv_price_gov"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="￥0.0"
-                    android:textColor="#f00"
+                    android:text="单价:￥1000.0"
+                    android:textColor="#E91E63"
                     android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/order_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="总价:￥5000.0"
+                    android:textColor="#f00"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/order_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="数量:5"
+                    android:textColor="#1C1C1C"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="10dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded">
+                <TextView
+                    android:id="@+id/user_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="订单收货地址:xx市xx区xx县xx街道xx号"
+                    android:textColor="#737070"
+                    android:lines="2"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="10dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded">
+                <TextView
+                    android:id="@+id/order_createTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="订单创建时间:1920.5.1 19:05:32"
+                    android:textColor="#1E1C1C"
+                    android:textSize="13sp" />
 
             </LinearLayout>
         </LinearLayout>

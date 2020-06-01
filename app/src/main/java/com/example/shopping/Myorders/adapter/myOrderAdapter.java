@@ -48,10 +48,15 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
         final Orderbean.MedOrderBean orderBean = datas.get(position);
         Orderbean.MedOrderBean.MedicineBean medicine = orderBean.getMedicine();
         System.out.println(orderBean);
-        holder.cbGov.setChecked(orderBean.getSelectEd());
+
+        holder.cbGov.setChecked(orderBean.isSelectEd());
         Glide.with(mContext).load(Constants.IMG_Med_TEST + medicine.getImg_url()).into(holder.ivGov);
         holder.tvDescGov.setText(medicine.getProduct_name());
-        holder.tvPriceGov.setText("￥"+medicine.getCover_price());
+        holder.tvOnePrice.setText("单价:￥"+medicine.getCover_price());
+        holder.total.setText("总价:￥"+orderBean.getTotal());
+        holder.orderCreateTime.setText("订单创建时间:"+orderBean.getCreateTime());
+        holder.userAddress.setText("订单收货地址:"+orderBean.getUserAddress());
+        holder.goodsNumber.setText("数量:"+orderBean.getGoodsNumber());
 
     }
 
@@ -70,7 +75,17 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
         //货物名称
         private TextView tvDescGov;
         //货物价格
-        private TextView tvPriceGov;
+        private TextView tvOnePrice;
+
+        private TextView total;
+
+        private TextView goodsNumber;
+
+        private TextView userAddress;
+
+        private TextView orderCreateTime;
+
+
 
 
         /**
@@ -87,7 +102,12 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
             cbGov = (CheckBox)itemView.findViewById( R.id.cb_gov );
             ivGov = (ImageView)itemView.findViewById( R.id.iv_gov );
             tvDescGov = (TextView)itemView.findViewById( R.id.tv_desc_gov );
-            tvPriceGov = (TextView)itemView.findViewById( R.id.tv_price_gov );
+            tvOnePrice = (TextView)itemView.findViewById( R.id.tv_price_gov );
+            total = itemView.findViewById(R.id.order_total);
+            goodsNumber=itemView.findViewById(R.id.order_number);
+            userAddress= itemView.findViewById(R.id.user_address);
+            orderCreateTime=itemView.findViewById(R.id.order_createTime);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -138,7 +158,7 @@ public class myOrderAdapter extends RecyclerView.Adapter<myOrderAdapter.viewHold
                 //1.根据位置找到对应的Bean对象
                 Orderbean.MedOrderBean orderbean = datas.get(position);
                 //2.设置取反状态
-                orderbean.setSelectEd(!orderbean.getSelectEd());
+                orderbean.setSelectEd(!orderbean.isSelectEd());
                 //3.刷新状态
 
                 notifyItemChanged(position);

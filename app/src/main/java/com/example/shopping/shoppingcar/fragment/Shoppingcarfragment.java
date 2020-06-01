@@ -17,7 +17,6 @@ import com.example.shopping.R;
 import com.example.shopping.app.MyApplication;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.home.bean.GoodsBean;
-import com.example.shopping.shoppingcar.Bean.Goods;
 import com.example.shopping.shoppingcar.Bean.SimOrderBean;
 import com.example.shopping.shoppingcar.adapter.ShoppingCartAdapter;
 import com.example.shopping.shoppingcar.utils.CartStorage;
@@ -27,7 +26,6 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -166,7 +164,7 @@ public class Shoppingcarfragment extends BaseFragment implements View.OnClickLis
 //            pay(v);
             if (MyApplication.isIfLogin()) {
                 AddToMyOrder();
-            }else Toast.makeText(my_Context, "请先登录！", Toast.LENGTH_SHORT).show();
+            } else Toast.makeText(my_Context, "请先登录！", Toast.LENGTH_SHORT).show();
         } else if (v == btnDelete) {
             // Handle clicks for btnDelete
             //删除选中的
@@ -184,73 +182,82 @@ public class Shoppingcarfragment extends BaseFragment implements View.OnClickLis
     }
 
     private void AddToMyOrder() {
-            SimOrderBean simOrderBean = new SimOrderBean();
-            List<Goods> goodsList = new ArrayList<Goods>();
-            double Total = 0.0;
-            goodsBeanList= null;
-            goodsBeanList = CartStorage.getInstance().getAllData();
+        goodsBeanList = CartStorage.getInstance().getAllData();
 
         int count = 0;
         for (GoodsBean goodsBean : goodsBeanList) {
-            if (goodsBean.isSelected()){
+            if (goodsBean.isSelected()) {
                 count++;
-            Goods goods = new Goods();
-            goods.setGoodName(goodsBean.getName());
-            goods.setId(Integer.parseInt(goodsBean.getProduct_id()));
-            goods.setNumber(goodsBean.getNumber());
-            goodsList.add(goods);
-            Total = Total + Double.parseDouble(goodsBean.getCover_price()) * (double) goodsBean.getNumber();
+                break;
             }
         }
 
-        if (count!=0) {
-            simOrderBean.setUserId(MyApplication.getUSer().getId());
-            simOrderBean.setAllGoods(goodsList.toString());
-            simOrderBean.setTotal(Total);
-            simOrderBean.setCreateTime(getCurTIme());
-            System.out.println(simOrderBean);
-            String json = new Gson().toJson(simOrderBean);
-            String url = Constants.TEST_URL + "medUser/updateUsersOrder";
-            //发送订单到服务器
-            OkHttpUtils.postString()
-                    .url(url)
-                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                    .content(json)
-                    .build()
-                    .execute(new StringCallback() {
-                        /**
-                         * 请求失败 回调
-                         *
-                         * @param call
-                         * @param e
-                         * @param id
-                         */
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Log.e(Constraints.TAG, "购买失败！" + e.getMessage());
+        if (count != 0) {
+            for (GoodsBean goodsBean : goodsBeanList) {
+                if (goodsBean.isSelected()) {
+                    //创建一个orderBean
+                    double Total = 0.0;
+                    SimOrderBean simOrderBean = new SimOrderBean();
+                    simOrderBean.setUserId(MyApplication.getUSer().getId());
+                    simOrderBean.setSid(Integer.parseInt(goodsBean.getProduct_id()));
+                    int goodsBeanNumber = goodsBean.getNumber();
+                    final String onePrice = goodsBean.getCover_price();
+                    Total = Double.parseDouble(onePrice)* goodsBeanNumber;
+                    simOrderBean.setTotal(Total);
+                    simOrderBean.setCreateTime(getCurTIme());
+                    simOrderBean.setGoodsNumber(goodsBeanNumber);
+                    simOrderBean.setOnePrice(Double.valueOf(onePrice));
+                    simOrderBean.setUserAddress("test address");
 
-                        }
 
-                        /**
-                         * 联网成功时
-                         *
-                         * @param response 请求成功数据
-                         * @param id
-                         */
+                    System.out.println(simOrderBean);
 
-                        @Override
-                        public void onResponse(String response, int id) {
-                            Log.e(Constraints.TAG, "订单设置成功!");
-                            Toast.makeText(my_Context, "购买成功！前往订单查看状态", Toast.LENGTH_SHORT).show();
-                        }
 
-                    });
-        }else Toast.makeText(my_Context, "请选中想要的商品后在选择！", Toast.LENGTH_SHORT).show();
+                    String json = new Gson().toJson(simOrderBean);
+                    String url = Constants.TEST_URL + "order/neworderbyUser";
+                    //发送订单到服务器
+                    OkHttpUtils.postString()
+                            .url(url)
+                            .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                            .content(json)
+                            .build()
+                            .execute(new StringCallback() {
+                                /**
+                                 * 请求失败 回调
+                                 *
+                                 * @param call
+                                 * @param e
+                                 * @param id
+                                 */
+                                @Override
+                                public void onError(Call call, Exception e, int id) {
+                                    Log.e(Constraints.TAG, "购买失败！" + e.getMessage());
+
+                                }
+
+                                /**
+                                 * 联网成功时
+                                 *
+                                 * @param response 请求成功数据
+                                 * @param id
+                                 */
+
+                                @Override
+                                public void onResponse(String response, int id) {
+                                    Log.e(Constraints.TAG, "订单设置成功!");
+                                    Toast.makeText(my_Context, "购买成功！前往订单查看状态", Toast.LENGTH_SHORT).show();
+                                }
+
+                            });
+                }
+            }
+        }
+        else Toast.makeText(my_Context, "请选中想要的商品后在选择！", Toast.LENGTH_SHORT).show();
 
     }
 
     private String getCurTIme() {
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d1 = new Date();
         String str1 = sdf1.format(d1);
         System.out.println("订单创建时间为： " + str1);

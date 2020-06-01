@@ -8,13 +8,13 @@ public class OrdertestBean implements Serializable {
 
     /**
      * msg : get success
-     * MedOrder : [{"createTime":"2020-05-23 12:50:06","goodsid":10,"id":1,"medicine":{"cover_price":29,"details":"抗生素类药，功效主要是消除炎症，主治上、下呼吸道感染下呼吸道感染，各种皮肤和软组织感染，泌尿生殖道感染，急性单纯性淋病。","img_url":"timg-2.jpeg","product_id":10,"product_name":"阿莫西林","type":"呼吸系统"},"uid":1},{"createTime":"2020-05-23 12:50:06","goodsid":15,"id":2,"medicine":{"cover_price":159,"details":"祛斑舒缓强效装：洁面乳+滋养面膜+柔肤水+修复霜皮宝修护中药护肤套装，具有500年品牌质量保障，集合清洁皮肤，补水保湿，舒缓修复肌肤，淡化色素沉着。一套护理大概2个月，增强皮肤屏障，防止色斑再生，为肌肤保湿滋养、舒缓修复肌肤，减少外部刺激。联合护肤，让肌肤保持年轻活力","img_url":"CgAgFVzeVbGAPz5BAABcPWGw0O8472.jpg","product_id":15,"product_name":"舒缓滋养面膜","type":"五官科药"},"uid":1}]
+     * MedOrder : [{"createTime":"2020-06-01 07:04:13","goodsNumber":1,"id":7,"medicine":{"cover_price":199,"details":"功能主治：保持血管畅通，降低血液粘稠度，具有降血脂、预防血栓的功效，适合中老年人群日常保养。","img_url":"047e267dc96e4f6f864c0183905f7cb0.jpg","product_id":31,"product_name":"gnc健安喜美国深海鱼油","type":"心脑血管"},"sid":31,"total":199,"uid":1,"userAddress":"test address"},{"createTime":"2020-06-01 07:04:14","goodsNumber":1,"id":8,"medicine":{"cover_price":72,"details":"功能主治：心绞痛发作的预防性治疗，眩晕和耳鸣的辅助性对症治疗。","img_url":"8f6edd247e6b49fb8ae7cee37e260e9b.jpg","product_id":38,"product_name":"万爽力盐酸曲美他嗪缓释片","type":"心脑血管"},"sid":38,"total":72,"uid":1,"userAddress":"test address"},{"createTime":"2020-06-01 07:05:47","goodsNumber":3,"id":9,"medicine":{"cover_price":173,"details":"功能主治：健康血脂血压，优化肝脏环境，增强大脑环境","img_url":"b650daf78ef94559a2e2a505b5729e9c.jpg","product_id":42,"product_name":"双心大豆卵磷脂胶囊","type":"心脑血管"},"sid":42,"total":519,"uid":1,"userAddress":"test address"},{"createTime":"2020-06-01 07:05:47","goodsNumber":2,"id":10,"medicine":{"cover_price":34.5,"details":"功能主治：益气通脉，宁心安神，生津止渴。用于胸痹、心悸、不寐，消渴气虚证，症见痛胸闷；心悸不安，失眠健忘，口渴多饮气短乏力；冠心病，心绞痛，心律失常，神经衰弱，2型糖尿病见上述证候者。","img_url":"109b80b01bfa4719952f223e2e7ebb9b.jpg","product_id":40,"product_name":"益盛振源胶囊","type":"心脑血管"},"sid":40,"total":69,"uid":1,"userAddress":"test address"},{"createTime":"2020-06-01 07:07:02","goodsNumber":3,"id":11,"medicine":{"cover_price":173,"details":"功能主治：健康血脂血压，优化肝脏环境，增强大脑环境","img_url":"b650daf78ef94559a2e2a505b5729e9c.jpg","product_id":42,"product_name":"双心大豆卵磷脂胶囊","type":"心脑血管"},"sid":42,"total":519,"uid":1,"userAddress":"test address"},{"createTime":"2020-06-01 07:07:02","goodsNumber":2,"id":12,"medicine":{"cover_price":34.5,"details":"功能主治：益气通脉，宁心安神，生津止渴。用于胸痹、心悸、不寐，消渴气虚证，症见痛胸闷；心悸不安，失眠健忘，口渴多饮气短乏力；冠心病，心绞痛，心律失常，神经衰弱，2型糖尿病见上述证候者。","img_url":"109b80b01bfa4719952f223e2e7ebb9b.jpg","product_id":40,"product_name":"益盛振源胶囊","type":"心脑血管"},"sid":40,"total":69,"uid":1,"userAddress":"test address"}]
      * code : 200
      * userId : 1
      */
 
     private String msg;
-    private String  code;
+    private String code;
     private int userId;
     private List<MedOrderBean> MedOrder;
 
@@ -52,28 +52,24 @@ public class OrdertestBean implements Serializable {
 
     public static class MedOrderBean {
         /**
-         * createTime : 2020-05-23 12:50:06
-         * goodsid : 10
-         * id : 1
-         * medicine : {"cover_price":29,"details":"抗生素类药，功效主要是消除炎症，主治上、下呼吸道感染下呼吸道感染，各种皮肤和软组织感染，泌尿生殖道感染，急性单纯性淋病。","img_url":"timg-2.jpeg","product_id":10,"product_name":"阿莫西林","type":"呼吸系统"}
+         * createTime : 2020-06-01 07:04:13
+         * goodsNumber : 1
+         * id : 7
+         * medicine : {"cover_price":199,"details":"功能主治：保持血管畅通，降低血液粘稠度，具有降血脂、预防血栓的功效，适合中老年人群日常保养。","img_url":"047e267dc96e4f6f864c0183905f7cb0.jpg","product_id":31,"product_name":"gnc健安喜美国深海鱼油","type":"心脑血管"}
+         * sid : 31
+         * total : 199.0
          * uid : 1
+         * userAddress : test address
          */
 
         private String createTime;
-        private int goodsid;
+        private int goodsNumber;
         private int id;
         private MedicineBean medicine;
+        private int sid;
+        private double total;
         private int uid;
-        private Boolean selectEd=Boolean.FALSE;
-
-        public Boolean getSelectEd() {
-            return selectEd;
-        }
-
-        public void setSelectEd(Boolean selectEd) {
-            this.selectEd = selectEd;
-        }
-
+        private String userAddress;
 
         public String getCreateTime() {
             return createTime;
@@ -83,12 +79,12 @@ public class OrdertestBean implements Serializable {
             this.createTime = createTime;
         }
 
-        public int getGoodsid() {
-            return goodsid;
+        public int getGoodsNumber() {
+            return goodsNumber;
         }
 
-        public void setGoodsid(int goodsid) {
-            this.goodsid = goodsid;
+        public void setGoodsNumber(int goodsNumber) {
+            this.goodsNumber = goodsNumber;
         }
 
         public int getId() {
@@ -107,6 +103,22 @@ public class OrdertestBean implements Serializable {
             this.medicine = medicine;
         }
 
+        public int getSid() {
+            return sid;
+        }
+
+        public void setSid(int sid) {
+            this.sid = sid;
+        }
+
+        public double getTotal() {
+            return total;
+        }
+
+        public void setTotal(double total) {
+            this.total = total;
+        }
+
         public int getUid() {
             return uid;
         }
@@ -115,14 +127,22 @@ public class OrdertestBean implements Serializable {
             this.uid = uid;
         }
 
+        public String getUserAddress() {
+            return userAddress;
+        }
+
+        public void setUserAddress(String userAddress) {
+            this.userAddress = userAddress;
+        }
+
         public static class MedicineBean {
             /**
-             * cover_price : 29.0
-             * details : 抗生素类药，功效主要是消除炎症，主治上、下呼吸道感染下呼吸道感染，各种皮肤和软组织感染，泌尿生殖道感染，急性单纯性淋病。
-             * img_url : timg-2.jpeg
-             * product_id : 10
-             * product_name : 阿莫西林
-             * type : 呼吸系统
+             * cover_price : 199.0
+             * details : 功能主治：保持血管畅通，降低血液粘稠度，具有降血脂、预防血栓的功效，适合中老年人群日常保养。
+             * img_url : 047e267dc96e4f6f864c0183905f7cb0.jpg
+             * product_id : 31
+             * product_name : gnc健安喜美国深海鱼油
+             * type : 心脑血管
              */
 
             private double cover_price;

@@ -74,13 +74,11 @@ public class OrderActivity extends Activity implements View.OnClickListener {
 
     private void getOrderJson() {
 
-//        String url = Constants.LOGIN_URL;
-        String url = Constants.TEST_URL+"medUser/MedOrderByUid";
+        String url = Constants.TEST_URL+"order/MedOrderByUid";
         OkHttpUtils
                 .post()
                 .url(url)
                 .addParams("uid", userId)
-//                .addParams("password", password)
                 .build()
                 .execute(new StringCallback()
                 {
@@ -92,7 +90,7 @@ public class OrderActivity extends Activity implements View.OnClickListener {
                      */
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG,"订单请求失败"+e.getMessage());
+                        Log.e(TAG,"订单请求服务器失败"+e.getMessage());
 
                     }
 
@@ -104,8 +102,7 @@ public class OrderActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG,"订单请求成功!");
-
+                        Log.e(TAG,"订单请求服务器成功!");
                         showdata(response);
 
                     }
@@ -120,9 +117,9 @@ public class OrderActivity extends Activity implements View.OnClickListener {
          * 3.设置订单适配器 放入订单数据  编辑界面的全选
          */
     private void showdata(String orderJson) {
-       final Orderbean orderbean = JSON.parseObject(orderJson, Orderbean.class);
 
-        final List<Orderbean.MedOrderBean> med_order = orderbean.getMed_order();
+       final Orderbean orderbean = JSON.parseObject(orderJson, Orderbean.class);
+        List<Orderbean.MedOrderBean> med_order = orderbean.getMedOrder();
 
         if (med_order!=null&&med_order.size()>0){
             tvOrderEdit.setVisibility(View.VISIBLE);
