@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.shopping.R;
+import com.example.shopping.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -95,7 +96,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener  
 
        if (checkStyle(name,pwd,phone)){
            System.out.println(name+"==="+pwd+"==="+phone);
-           String url = "http://192.168.5.1/springall/medUser/register";
+           String url = Constants.TEST_URL +"medUser/register";
            OkHttpUtils
                    .post()
                    .url(url)

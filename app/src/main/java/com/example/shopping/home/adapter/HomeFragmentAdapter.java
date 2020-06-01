@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
@@ -38,10 +36,10 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
      */
     public static final  int BANNER = 0;
     public static final  int CHANNEL = 1;
-    public static final  int ACT = 2;
+//    public static final  int ACT = 2;
 //    public static final  int SECKILL = 3;
-    public static final  int RECOMMEND = 3;
-    public static final  int HOT = 4;
+    public static final  int RECOMMEND = 2;
+    public static final  int HOT = 3;
     /**
      * 初始化布局
      */
@@ -86,9 +84,10 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             return new BannerViewHolder(my_context,inflater.inflate(R.layout.banner_viewpager,null));
         }else if (viewType == CHANNEL) {
             return new ChannelViewHolder(my_context, inflater.inflate(R.layout.channel_item, null));
-        } else if (viewType == ACT) {
-                return new ActViewHolder(my_context, inflater.inflate(R.layout.act_item, null));
         }
+//        else if (viewType == ACT) {
+//                return new ActViewHolder(my_context, inflater.inflate(R.layout.act_item, null));
+//        }
         else if(viewType == RECOMMEND ){
             return new RecommendViewHolder(my_context, inflater.inflate(R.layout.recommend_item, null));
         }else if(viewType == HOT){
@@ -114,10 +113,10 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
             channelViewHolder.setData(resultBean.getChannel_info());
         }
-    else if (getItemViewType(position) == ACT) {
-        ActViewHolder actViewHolder = (ActViewHolder) holder;
-        actViewHolder.setData(resultBean.getAct_info());
-    }
+//    else if (getItemViewType(position) == ACT) {
+//        ActViewHolder actViewHolder = (ActViewHolder) holder;
+//        actViewHolder.setData(resultBean.getAct_info());
+//    }
 
 
     else if(getItemViewType(position) == RECOMMEND){
@@ -147,7 +146,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         //开发过程中从一到6
-        return 5;
+        return 4;
     }
 
     /**
@@ -164,9 +163,9 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
             case CHANNEL:
                 currentType = CHANNEL;
                 break;
-            case ACT:
-                currentType = ACT;
-                break;
+//            case ACT:
+//                currentType = ACT;
+//                break;
 //            case SECKILL:
 //                currentType = SECKILL;
 //                break;
@@ -279,78 +278,78 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class ActViewHolder extends RecyclerView.ViewHolder {
-        private Context mContext;
-        private ViewPager act_viewpager;
-
-        public ActViewHolder(Context mContext, View itemView) {
-            super(itemView);
-            this.mContext = mContext;
-            act_viewpager = (ViewPager) itemView.findViewById(R.id.act_viewpager);
-        }
-
-        public void setData(final List<MedreslutBeanData.ResultBean.ActInfoBean> act_info) {
-            act_viewpager.setPageMargin(20);
-            act_viewpager.setOffscreenPageLimit(3);//>=3
-
-            //setPageTransformer 决定动画效果 第三方库
-//            act_viewpager.setPageTransformer(true, new
-//                    ScaleInTransformer());
-            //1.有数据了
-            //2.设置适配器
-            act_viewpager.setAdapter(new PagerAdapter() {
-                @Override
-                public int getCount() {
-                    return act_info.size();
-                }
-
-                /**
-                 *
-                 * @param view 页面
-                 * @param object instantiateItem方法返回的值
-                 * @return
-                 */
-                @Override
-                public boolean isViewFromObject(View view, Object object) {
-                    return view == object;
-                }
-
-                /**
-                 *
-                 * @param container ViewPager
-                 * @param position 对应页面的位置
-                 * @return
-                 */
-                @Override
-                public Object instantiateItem(ViewGroup container, final int position) {
-                    ImageView imageView = new ImageView(mContext);
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-                    Glide.with(mContext).load(Constants.IMG_URL + act_info.get(position).getIcon_url()).into(imageView);
-                    //添加到容器中
-                    container.addView(imageView);
-
-                    //设置点击事件
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
-//                            startGoodsInfoActivity(goodsBean);
-
-                        }
-                    });
-
-
-                    return imageView;
-                }
-
-                @Override
-                public void destroyItem(ViewGroup container, int position, Object object) {
-                    container.removeView((View) object);
-                }
-            });
-        }
-    }
+//    class ActViewHolder extends RecyclerView.ViewHolder {
+//        private Context mContext;
+//        private ViewPager act_viewpager;
+//
+//        public ActViewHolder(Context mContext, View itemView) {
+//            super(itemView);
+//            this.mContext = mContext;
+//            act_viewpager = (ViewPager) itemView.findViewById(R.id.act_viewpager);
+//        }
+//
+//        public void setData(final List<MedreslutBeanData.ResultBean.ActInfoBean> act_info) {
+//            act_viewpager.setPageMargin(20);
+//            act_viewpager.setOffscreenPageLimit(3);//>=3
+//
+//            //setPageTransformer 决定动画效果 第三方库
+////            act_viewpager.setPageTransformer(true, new
+////                    ScaleInTransformer());
+//            //1.有数据了
+//            //2.设置适配器
+//            act_viewpager.setAdapter(new PagerAdapter() {
+//                @Override
+//                public int getCount() {
+//                    return act_info.size();
+//                }
+//
+//                /**
+//                 *
+//                 * @param view 页面
+//                 * @param object instantiateItem方法返回的值
+//                 * @return
+//                 */
+//                @Override
+//                public boolean isViewFromObject(View view, Object object) {
+//                    return view == object;
+//                }
+//
+//                /**
+//                 *
+//                 * @param container ViewPager
+//                 * @param position 对应页面的位置
+//                 * @return
+//                 */
+//                @Override
+//                public Object instantiateItem(ViewGroup container, final int position) {
+//                    ImageView imageView = new ImageView(mContext);
+//                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//
+//                    Glide.with(mContext).load(Constants.IMG_URL + act_info.get(position).getIcon_url()).into(imageView);
+//                    //添加到容器中
+//                    container.addView(imageView);
+//
+//                    //设置点击事件
+//                    imageView.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
+////                            startGoodsInfoActivity(goodsBean);
+//
+//                        }
+//                    });
+//
+//
+//                    return imageView;
+//                }
+//
+//                @Override
+//                public void destroyItem(ViewGroup container, int position, Object object) {
+//                    container.removeView((View) object);
+//                }
+//            });
+//        }
+//    }
 
     class RecommendViewHolder extends RecyclerView.ViewHolder{
 
