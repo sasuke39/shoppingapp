@@ -93,65 +93,65 @@
                 android:layout_height="1dp"
                 android:background="#eee" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="10dp">-->
 
-                <TextView
-                    android:id="@+id/tv_user_pay"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="10dp"
-                    android:drawableTop="@drawable/new_order_status_fukuan"
-                    android:gravity="center"
-                    android:text="待付款"
-                    android:textColor="#5d5d5d" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_user_pay"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:drawableTop="@drawable/new_order_status_fukuan"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="待付款"-->
+<!--                    android:textColor="#5d5d5d" />-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="10dp"
-                    android:drawableTop="@drawable/new_order_status_fahuo"
-                    android:gravity="center"
-                    android:text="待发货"
-                    android:textColor="#5d5d5d" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:drawableTop="@drawable/new_order_status_fahuo"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="待发货"-->
+<!--                    android:textColor="#5d5d5d" />-->
 
-                <TextView
-                    android:id="@+id/tv_user_receive"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="10dp"
-                    android:drawableTop="@drawable/new_order_status_shouhuo"
-                    android:gravity="center"
-                    android:text="待收获"
-                    android:textColor="#5d5d5d" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_user_receive"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:drawableTop="@drawable/new_order_status_shouhuo"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="待收获"-->
+<!--                    android:textColor="#5d5d5d" />-->
 
-                <TextView
-                    android:id="@+id/tv_user_finish"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="10dp"
-                    android:drawableTop="@drawable/icon_order_status_finish"
-                    android:gravity="center"
-                    android:text="已完成"
-                    android:textColor="#5d5d5d" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_user_finish"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:drawableTop="@drawable/icon_order_status_finish"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="已完成"-->
+<!--                    android:textColor="#5d5d5d" />-->
 
-                <TextView
-                    android:id="@+id/tv_user_drawback"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="10dp"
-                    android:drawableTop="@drawable/new_order_status_help"
-                    android:gravity="center"
-                    android:text="售后/退款"
-                    android:textColor="#5d5d5d" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_user_drawback"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:drawableTop="@drawable/new_order_status_help"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="售后/退款"-->
+<!--                    android:textColor="#5d5d5d" />-->
+<!--            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
