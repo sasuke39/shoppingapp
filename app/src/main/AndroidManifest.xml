@@ -6,7 +6,18 @@
 
     <dist:module dist:instant="true" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 因为拍照需要写入文件 所以需要申请读取内存的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:networkSecurityConfig="@xml/network_security_config"
         android:name=".app.MyApplication"
@@ -14,9 +25,13 @@
         android:icon="@drawable/atguigu_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="n">
+        tools:targetApi="q">
+        <service
+            android:name=".service.SimpleService"
+            android:exported="true" />
         <activity android:name=".app.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +44,9 @@
         <activity android:name=".app.LoginActivity"/>
         <activity android:name=".app.RegisterActivity"/>
         <!-- 配置Service组件,同时配置一个action -->
-        <service android:name=".app.UserService"/>
         <activity android:name=".app.OrderActivity"/>
+        <activity android:name=".app.UserInfoActivity"/>
+        <activity android:name=".app.PhotoActivity"/>
 
     </application>
 

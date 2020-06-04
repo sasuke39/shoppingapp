@@ -97,6 +97,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener  
        if (checkStyle(name,pwd,phone)){
            System.out.println(name+"==="+pwd+"==="+phone);
            String url = Constants.TEST_URL +"medUser/register";
+
            OkHttpUtils
                    .post()
                    .url(url)

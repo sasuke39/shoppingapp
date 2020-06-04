@@ -13,19 +13,25 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.shopping.R;
 import com.example.shopping.app.LoginActivity;
 import com.example.shopping.app.MainActivity;
 import com.example.shopping.app.MyApplication;
 import com.example.shopping.app.OrderActivity;
+import com.example.shopping.app.UserInfoActivity;
 import com.example.shopping.base.BaseFragment;
+import com.example.shopping.service.SimpleService;
 import com.example.shopping.user.bean.UserBean;
+import com.example.shopping.utils.Constants;
 import com.google.gson.Gson;
+
+import java.util.Objects;
 
 import static com.example.shopping.app.MyApplication.setUser;
 
 public class UserFragment extends BaseFragment implements View.OnClickListener {
-    private ImageButton ibUserIconAvator;
+    private ImageButton userIcon;
     private TextView tvUsername;
     private TextView tvAllOrder;
     private TextView tvUserPay;
@@ -42,6 +48,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private TextView tvUserCallcenter;
     private TextView tvUserFeedback;
     private TextView tvUsercenter;
+    private TextView userNotify;
     private ImageButton ibUserSetting;
     private ImageButton ibUserMessage;
     private ScrollView scrollView;
@@ -61,7 +68,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
      * @param view
      */
     private void findViews(View view) {
-        ibUserIconAvator = (ImageButton) view.findViewById(R.id.ib_user_icon_avator);
+        userIcon = (ImageButton) view.findViewById(R.id.user_icon);
         tvUsername = (TextView) view.findViewById(R.id.tv_username);
         tvAllOrder = (TextView) view.findViewById(R.id.tv_all_order);
         tvUserPay = (TextView) view.findViewById(R.id.tv_user_pay);
@@ -82,13 +89,18 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         ibUserMessage = (ImageButton) view.findViewById(R.id.ib_user_message);
         scrollView = (ScrollView) view.findViewById(R.id.scrollview);
         userShutdown = view.findViewById(R.id.user_shutdown);
+        view.findViewById(R.id.user_icon);
+
+        userNotify=view.findViewById(R.id.user_notify);
 
 
         tvAllOrder.setOnClickListener(this);
         userShutdown.setOnClickListener(this);
-        ibUserIconAvator.setOnClickListener(this);
+        userIcon.setOnClickListener(this);
         ibUserSetting.setOnClickListener(this);
         ibUserMessage.setOnClickListener(this);
+        userNotify.setOnClickListener(this);
+        tvUsername.setOnClickListener(this);
     }
 
     /**
@@ -99,10 +111,12 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v == ibUserIconAvator) {
-            if (!MyApplication.isIfLogin()) {
-                Intent intent = new Intent(my_Context, LoginActivity.class);
-                startActivityForResult(intent, 0);
+        if (v == userIcon) {
+            if (MyApplication.isIfLogin()) {
+                Intent intent = new Intent(my_Context, UserInfoActivity.class);
+                startActivity(intent);
+            }else {
+                Toast.makeText(my_Context, "请先登录哦！", Toast.LENGTH_SHORT).show();
             }
         } else if (v == ibUserSetting) {
             Toast.makeText(my_Context, "设置", Toast.LENGTH_SHORT).show();
@@ -116,6 +130,15 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         }else if (v==tvAllOrder){
             System.out.println(!MyApplication.isIfLogin());
             startOrdersActivity();
+        }else if (v==userNotify){
+            Intent startIntent = new Intent(getContext(), SimpleService.class);
+            startIntent.putExtra("start","1");
+            Objects.requireNonNull(getActivity()).startService(startIntent);
+        }else if (v==tvUsername){
+            if (!MyApplication.isIfLogin()) {
+                Intent intent = new Intent(my_Context, LoginActivity.class);
+                startActivityForResult(intent, 0);
+            }
         }
     }
 
@@ -162,7 +185,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                     case MotionEvent.ACTION_DOWN:
                         break;
                     case MotionEvent.ACTION_MOVE://下滑是正，上滑是负
-                        ibUserIconAvator.getLocationOnScreen(location);//初始状态为125,即最大值是125，全部显示不透明是（40？）
+                        userIcon.getLocationOnScreen(location);//初始状态为125,即最大值是125，全部显示不透明是（40？）
                         float i = (location[1] - 40) / 85f;
                         tvUsercenter.setAlpha(1 - i);
                         break;
@@ -187,7 +210,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     }
     public void IntoData(UserBean.MedUserBean medUserBean){
+        MyApplication.setUser(medUserBean);
         tvUsername.setText(medUserBean.getUsername());
+        Glide.with(my_Context).load(Constants.IMG_User_icon + medUserBean.getUser_icon()).into(userIcon);
         MyApplication.setIfLogin(true);
     }
 }

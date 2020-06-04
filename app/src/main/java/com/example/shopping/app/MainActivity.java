@@ -12,7 +12,6 @@ import com.example.shopping.R;
 import com.example.shopping.base.BaseFragment;
 import com.example.shopping.home.fragment.HomeFragment;
 import com.example.shopping.shoppingcar.fragment.Shoppingcarfragment;
-import com.example.shopping.type.fragment.TypeFragment;
 import com.example.shopping.user.fragment.UserFragment;
 
 import java.util.ArrayList;
@@ -78,17 +77,17 @@ public class MainActivity extends FragmentActivity {
                 case R.id.rb_home://主页
                     position = 0;
                     break;
-                case R.id.rb_type://分类
-                    position = 1;
-                    break;
+//                case R.id.rb_type://分类
+//                    position = 1;
+//                    break;
 //                case R.id.rb_community://发现
 //                    position = 2;
 //                    break;
                 case R.id.rb_cart://购物车
-                    position = 2;
+                    position = 1;
                     break;
                 case R.id.rb_user://用户中心
-                    position = 3;
+                    position = 2;
                     break;
                 default:
                     position = 0;
@@ -162,7 +161,7 @@ public class MainActivity extends FragmentActivity {
     private void initFragment() {
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-        fragments.add(new TypeFragment());
+//        fragments.add(new TypeFragment());
 //        fragments.add(new CommunityFragment());
         fragments.add(new Shoppingcarfragment());
         fragments.add(new UserFragment());

@@ -55,4 +55,5 @@ dependencies {
     implementation project(path: ':FlycoTabLayout_Lib')
 //    implementation project(path: ':AddSubView')
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
 }

@@ -17,6 +17,8 @@ public class Constants {
 
     public static String IMG_Med_TEST="http://192.168.5.1:8081/med_img/";
 
+    public static String IMG_User_icon="http://192.168.5.1:8081/Medapp/user_icon/";
+
     public static String TEST_URL="http://192.168.5.1/";
 
 

@@ -50,6 +50,26 @@ public class UserBean implements Serializable {
         private String password;
         private String phoneNumber;
         private String username;
+        private String user_icon;
+
+        @Override
+        public String toString() {
+            return "MedUserBean{" +
+                    "id=" + id +
+                    ", password='" + password + '\'' +
+                    ", phoneNumber='" + phoneNumber + '\'' +
+                    ", username='" + username + '\'' +
+                    ", user_icon='" + user_icon + '\'' +
+                    '}';
+        }
+
+        public String getUser_icon() {
+            return user_icon;
+        }
+
+        public void setUser_icon(String user_icon) {
+            this.user_icon = user_icon;
+        }
 
         public int getId() {
             return id;
@@ -83,15 +103,6 @@ public class UserBean implements Serializable {
             this.username = username;
         }
 
-        @Override
-        public String toString() {
-            return "MedUserBean{" +
-                    "id=" + id +
-                    ", password='" + password + '\'' +
-                    ", phoneNumber='" + phoneNumber + '\'' +
-                    ", username='" + username + '\'' +
-                    '}';
-        }
     }
 
     @Override
