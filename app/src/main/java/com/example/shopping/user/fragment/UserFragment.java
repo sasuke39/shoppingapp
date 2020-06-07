@@ -71,10 +71,10 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         userIcon = (ImageButton) view.findViewById(R.id.user_icon);
         tvUsername = (TextView) view.findViewById(R.id.tv_username);
         tvAllOrder = (TextView) view.findViewById(R.id.tv_all_order);
-        tvUserPay = (TextView) view.findViewById(R.id.tv_user_pay);
-        tvUserReceive = (TextView) view.findViewById(R.id.tv_user_receive);
-        tvUserFinish = (TextView) view.findViewById(R.id.tv_user_finish);
-        tvUserDrawback = (TextView) view.findViewById(R.id.tv_user_drawback);
+//        tvUserPay = (TextView) view.findViewById(R.id.tv_user_pay);
+//        tvUserReceive = (TextView) view.findViewById(R.id.tv_user_receive);
+//        tvUserFinish = (TextView) view.findViewById(R.id.tv_user_finish);
+//        tvUserDrawback = (TextView) view.findViewById(R.id.tv_user_drawback);
         tvUserLocation = (TextView) view.findViewById(R.id.tv_user_location);
         tvUserCollect = (TextView) view.findViewById(R.id.tv_user_collect);
 //        tvUserCoupon = (TextView) view.findViewById(R.id.tv_user_coupon);

@@ -4,10 +4,10 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "27.1.1"
     defaultConfig {
         applicationId "com.example.shopping"
-        minSdkVersion 27
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -22,7 +22,7 @@ android {
         variant ->
             variant.outputs.all {
                 // 此处指定生成的apk文件名
-                outputFileName = "SecTest.apk"
+                outputFileName = "medicine.apk"
             }
     }
     buildTypes {
