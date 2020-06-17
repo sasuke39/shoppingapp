@@ -2,27 +2,35 @@ package com.example.shopping.utils;
 
 public class Constants {
 
-    public static String Base_URL ="http://192.168.5.1:8081/atguigu";
+    public static String BaseTEST_URL ="http://192.168.5.1:8081/Medapp";
+    public static String BaseTrue_URL ="http://3i017441z6.zicp.vip/Medapp";
 
-    public static String HOME_URL=Base_URL+"/json/HOME_URL1.json";
-    public static String LOGIN_URL=Base_URL+"/login";
+    public static String HOME_URL=BaseTEST_URL+"/json/HOME_URL1.json";
+    public static String LOGIN_URL=BaseTEST_URL+"/login";
+
     /**
      * 图片路径
      */
+    public static String home1=BaseTrue_URL+"/HOME_URL1.json";
+    public static String IMG_URL=BaseTrue_URL+"/img";
 
-    public static String home1="http://192.168.5.1:8081/Medapp/HOME_URL1.json";
-    public static String IMG_URL=Base_URL+"/img";
+    public static String IMG_Med=BaseTrue_URL+"/med_img/";
 
-    public static String IMG_Med="http://3i017441z6.zicp.vip/med_img/";
+    public static String IMG_Med_TEST=BaseTrue_URL+"/med_img/";
 
-    public static String IMG_Med_TEST="http://192.168.5.1:8081/med_img/";
+    public static String IMG_User_icon=BaseTrue_URL+"/user_icon/";
 
-    public static String IMG_User_icon="http://192.168.5.1:8081/Medapp/user_icon/";
+    public static String TEST_URL="http://3i017441z6.zicp.vip/MedApp-1.0/";
 
-    public static String TEST_URL="http://192.168.5.1/";
+    public static String postUrl=TEST_URL+"medUser/uploadUserIcon";
 
 
-    private static final String BASE_URL_JSON = Base_URL+"/json/";
+    private static final String BASE_URL_JSON = BaseTEST_URL+"/json/";
+
+
+
+
+
     //小裙子
     public static final String SKIRT_URL = BASE_URL_JSON + "SKIRT_URL.json";
     //上衣

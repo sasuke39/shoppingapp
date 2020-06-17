@@ -142,7 +142,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         tvGoodInfoDesc = (TextView)findViewById( R.id.tv_good_info_desc );
         tvGoodInfoPrice = (TextView)findViewById( R.id.tv_good_info_price );
         tvGoodInfoStore = (TextView)findViewById( R.id.tv_good_info_store );
-        tvGoodInfoStyle = (TextView)findViewById( R.id.tv_good_info_style );
+//        tvGoodInfoStyle = (TextView)findViewById( R.id.tv_good_info_style );
         /**
          * 图文详情web页
          */

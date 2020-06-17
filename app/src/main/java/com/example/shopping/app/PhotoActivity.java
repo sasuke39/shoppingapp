@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import com.alibaba.fastjson.JSON;
 import com.example.shopping.CommonBean;
 import com.example.shopping.R;
+import com.example.shopping.utils.Constants;
 import com.example.shopping.utils.PathHelper;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -53,7 +54,7 @@ public class PhotoActivity extends Activity implements View.OnClickListener {
     private Intent intent;
     private final int CAMERA = 1;//事件枚举(可以自定义)
     private final int CHOOSE = 2;//事件枚举(可以自定义)
-    private final String postUrl = "http://192.168.5.1/medUser/uploadUserIcon";//接收上传图片的地址
+    private final String postUrl = Constants.postUrl;//接收上传图片的地址
     String photoPath = "";//要上传的图片路径
     private final int permissionCode = 100;//权限请求码
     String[] permissions = new String[]{

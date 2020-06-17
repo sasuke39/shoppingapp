@@ -9,5 +9,5 @@
         android:id="@+id/gv_channel"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:numColumns="5"></GridView>
+        android:numColumns="5"/>
 </LinearLayout>

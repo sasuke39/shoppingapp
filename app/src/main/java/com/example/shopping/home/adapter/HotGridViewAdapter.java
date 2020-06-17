@@ -78,6 +78,7 @@ class HotGridViewAdapter  extends BaseAdapter {
         Glide.with(my_context).load(Constants.IMG_Med +hotInfoBean.getImg_url()).into(viewHolder.iv_hot);
         viewHolder.tv_name.setText(hotInfoBean.getProduct_name());
         viewHolder.tv_price.setText("￥"+hotInfoBean.getCover_price());
+
         return convertView;
 
     }

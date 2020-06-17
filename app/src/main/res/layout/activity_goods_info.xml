@@ -143,19 +143,19 @@
                             android:layout_height="8dp"
                             android:background="#eeee" />
 
-                        <TextView
-                            android:id="@+id/tv_good_info_style"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/home_arrow_right"
-                            android:padding="10dp"
-                            android:text="请选择所需"
-                            android:textColor="#3c3d40" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_good_info_style"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:drawableRight="@drawable/home_arrow_right"-->
+<!--                            android:padding="10dp"-->
+<!--                            android:text="请选择所需"-->
+<!--                            android:textColor="#3c3d40" />-->
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="8dp"
-                            android:background="#eeee" />
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="8dp"-->
+<!--                            android:background="#eeee" />-->
 
                         <TextView
                             android:layout_width="match_parent"
@@ -171,19 +171,19 @@
 
                         <!--       分割线       -->
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:text="图文详情"
-                            android:textColor="#3c3d40"
-                            android:textSize="15sp" />
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center"-->
+<!--                            android:padding="10dp"-->
+<!--                            android:text="图文详情"-->
+<!--                            android:textColor="#3c3d40"-->
+<!--                            android:textSize="15sp" />-->
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#E91E1E" />
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="1dp"-->
+<!--                            android:background="#E91E1E" />-->
 
                     </LinearLayout>
 
@@ -222,7 +222,7 @@
                 android:drawableTop="@drawable/icon_callserver_unpressed"
                 android:gravity="center"
                 android:padding="2dp"
-                android:text="联系客服"
+                android:text="个人中心"
                 android:textColor="#393b3e" />
 
             <TextView

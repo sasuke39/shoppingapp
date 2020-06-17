@@ -88,7 +88,8 @@
         </LinearLayout>
 
         <!--当数据为空的时候显示的布局-->
-        <include layout="@layout/empty_cart"></include>
+        <include layout="@layout/empty_cart"/>
+
     </FrameLayout>
 
 </LinearLayout>

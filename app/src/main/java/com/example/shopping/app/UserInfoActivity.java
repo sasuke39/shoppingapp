@@ -5,15 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.shopping.R;
+import com.example.shopping.service.SimpleService;
 import com.example.shopping.user.bean.UserBean;
 import com.example.shopping.utils.Constants;
 
@@ -30,6 +33,7 @@ public class UserInfoActivity extends Activity implements View.OnClickListener {
     private ImageButton btnBackToUserFragment;
     private Context context;
     private UserBean.MedUserBean medUserBean;
+    private boolean FlagOfNotify = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +70,24 @@ public class UserInfoActivity extends Activity implements View.OnClickListener {
 
         userIcon.setOnClickListener( this );
         btnBackToUserFragment.setOnClickListener( this );
+        swUserNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    Toast.makeText(context, "打开了", Toast.LENGTH_SHORT).show();
+                    Intent startIntent = new Intent(context, SimpleService.class);
+                    startIntent.putExtra("start","1");
+                    startService(startIntent);
+                }
+                else {
+                    Toast.makeText(context, "关闭了", Toast.LENGTH_SHORT).show();
+                    Intent stopIntent = new Intent(context, SimpleService.class);
+                    stopService(stopIntent);
+                }
+            }
+        });
+
     }
 
     /**
@@ -86,6 +108,7 @@ public class UserInfoActivity extends Activity implements View.OnClickListener {
             finish();
         }
     }
+
 
 
 }

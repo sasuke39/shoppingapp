@@ -47,6 +47,7 @@
         <activity android:name=".app.OrderActivity"/>
         <activity android:name=".app.UserInfoActivity"/>
         <activity android:name=".app.PhotoActivity"/>
+        <activity android:name=".app.SearchActivity"/>
 
     </application>
 

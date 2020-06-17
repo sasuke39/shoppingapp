@@ -14,7 +14,7 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:background="#DCDACB">
 
                 <ImageView
@@ -31,19 +31,16 @@
                     android:id="@+id/user_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginEnd="176dp"
                     android:layout_marginBottom="22dp"
                     android:background="@drawable/icon_addperson" />
 
                 <TextView
                     android:id="@+id/tv_image_tip"
                     style="@style/TextStyle"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="160dp"
                     android:layout_marginBottom="9dp"
+                    android:layout_centerHorizontal="true"
                     android:text="点击头像即可更改"
                     android:textSize="10dp" />
 
@@ -100,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text="通知推送"
                 android:drawableLeft="@drawable/user_channel_icon_invitation"
-                />
+                android:gravity="start" />
 
 
             <View

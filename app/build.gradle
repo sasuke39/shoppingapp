@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -34,6 +33,7 @@ android {
 
 }
 
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -53,7 +53,13 @@ dependencies {
     implementation project(path: ':banner')
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation project(path: ':FlycoTabLayout_Lib')
-//    implementation project(path: ':AddSubView')
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation project(':flowlayout-lib')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 }

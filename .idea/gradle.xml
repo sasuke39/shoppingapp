@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/ScrollViewContainer" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/banner" />
+            <option value="$PROJECT_DIR$/flowlayout-lib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
