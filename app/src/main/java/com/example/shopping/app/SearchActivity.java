@@ -36,7 +36,6 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     private ConstraintLayout clToolbar;
     private ImageView ivBack;
     private EditText editSearch;
-    private ImageView ivClearSearch;
     private TextView ivSearch;
     private FrameLayout frameLayout;
     private RecyclerView recyclerviewSearchItem;
@@ -49,6 +48,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
     private mySearchAdapter adapter;
 
+    private ImageView clearSearchWord;
 
     /**
      * Find the Views in the layout<br />
@@ -60,13 +60,13 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         clToolbar = (ConstraintLayout)findViewById( R.id.cl_toolbar );
         ivBack = (ImageView)findViewById( R.id.iv_back );
         editSearch = (EditText)findViewById( R.id.edit_searchPage );
-        ivClearSearch = (ImageView)findViewById( R.id.iv_clear_search );
         ivSearch = (TextView)findViewById( R.id.iv_search );
         frameLayout = (FrameLayout)findViewById( R.id.frameLayout );
         recyclerviewSearchItem = (RecyclerView)findViewById( R.id.recyclerview_search_item );
-
+        clearSearchWord = findViewById(R.id.iv_clear_search);
         ivSearch.setOnClickListener(this);
         ivBack.setOnClickListener(this);
+        clearSearchWord.setOnClickListener(this);
     }
 
     @Override
@@ -92,9 +92,10 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             startSearch(record);
         }else if (v==ivBack){
             finish();
+        }else if (v==clearSearchWord){
+            editSearch.setText("");
         }
     }
-
 
     private void startSearch(String searchWord) {
         String url = TEST_URL+"Medicine/searchMedicine";
