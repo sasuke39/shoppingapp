@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.shopping.R;
@@ -21,16 +22,19 @@ import java.util.List;
 import okhttp3.Call;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.shopping.utils.Constants.TEST_URL;
 
 
 public class type2ChildFg extends BaseFragment {
     private String FragmentName="分类二";
     private GridView typeList;
     private MyTypeChildAdapter adapter;
+    private TextView type_text;
     @Override
     public View initView() {
         View view =View.inflate(my_Context, R.layout.type_fl1,null);
         typeList= view.findViewById(R.id.gv_type);
+        type_text=view.findViewById(R.id.type_text);
         return view;
     }
 
@@ -43,7 +47,7 @@ public class type2ChildFg extends BaseFragment {
 
 
     private void getDataFromNet() {
-        String url = "http://192.168.5.1/Medicine/getMedicineByType";
+        String url = TEST_URL+"Medicine/getMedicineByType";
         OkHttpUtils
                 .get()
                 .addParams("type","皮肤科药")
@@ -88,7 +92,7 @@ public class type2ChildFg extends BaseFragment {
             if (medicineBeanList!=null||!medicineBeanList.toString().equals("[]")){
                 adapter = new MyTypeChildAdapter(my_Context, medicineBeanList);
                 typeList.setAdapter(adapter);
-
+                type_text.setText("皮肤科药");
 
                 typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

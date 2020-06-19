@@ -29,11 +29,13 @@ import okhttp3.Call;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.example.shopping.app.MyApplication.getContext;
+import static com.example.shopping.utils.CommonUtils.hideSoftInput;
+import static com.example.shopping.utils.Constants.TEST_URL;
 
 public class SearchActivity extends Activity implements View.OnClickListener {
     private ConstraintLayout clToolbar;
     private ImageView ivBack;
-    private EditText editQuery;
+    private EditText editSearch;
     private ImageView ivClearSearch;
     private TextView ivSearch;
     private FrameLayout frameLayout;
@@ -57,7 +59,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     private void findViews() {
         clToolbar = (ConstraintLayout)findViewById( R.id.cl_toolbar );
         ivBack = (ImageView)findViewById( R.id.iv_back );
-        editQuery = (EditText)findViewById( R.id.edit_query );
+        editSearch = (EditText)findViewById( R.id.edit_searchPage );
         ivClearSearch = (ImageView)findViewById( R.id.iv_clear_search );
         ivSearch = (TextView)findViewById( R.id.iv_search );
         frameLayout = (FrameLayout)findViewById( R.id.frameLayout );
@@ -75,6 +77,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         findViews();
         searchWord = getIntent().getStringExtra("searchWord");
         if (searchWord!=null) {
+            editSearch.setText(searchWord);
             startSearch(searchWord);
             Toast.makeText(context, searchWord, Toast.LENGTH_SHORT).show();
         }
@@ -84,7 +87,9 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v==ivSearch){
-            Toast.makeText(context, searchWord, Toast.LENGTH_SHORT).show();
+            String record = editSearch.getText().toString();
+            hideSoftInput(context,v);
+            startSearch(record);
         }else if (v==ivBack){
             finish();
         }
@@ -92,7 +97,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
 
     private void startSearch(String searchWord) {
-        String url = "http://192.168.5.1/Medicine/searchMedicine";
+        String url = TEST_URL+"Medicine/searchMedicine";
         OkHttpUtils
                 .post()
                 .url(url)

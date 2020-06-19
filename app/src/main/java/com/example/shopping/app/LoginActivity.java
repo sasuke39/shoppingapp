@@ -205,8 +205,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             setResult(1, intent);
             System.out.println("ITs 200");
         }else {
-            System.out.println("ITS 500");
-            intent.putExtra("MSG", "failed!");
+            System.out.println("ITS "+userBean.getCode());
+            intent.putExtra("MSG", userBean.getMsg());
             setResult(2,intent);
         }
         finish();

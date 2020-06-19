@@ -42,7 +42,7 @@
             app:layout_constraintRight_toLeftOf="@+id/iv_search">
 
             <EditText
-                android:id="@+id/edit_query"
+                android:id="@+id/edit_searchPage"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

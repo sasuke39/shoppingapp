@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +51,8 @@ import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.Call;
 
+import static com.example.shopping.utils.CommonUtils.hideSoftInput;
+
 
 public class HomeFragment extends BaseFragment {
 
@@ -82,6 +86,8 @@ public class HomeFragment extends BaseFragment {
     ImageView moreArrow;
     @BindView(R.id.ll_history_content)
     LinearLayout mHistoryContent;
+    @BindView(R.id.search_flag)
+    LinearLayout searchFlag;
     private RecyclerView rvHome;
     private ImageView ib_top;
     private EditText ed_search;
@@ -304,30 +310,19 @@ public class HomeFragment extends BaseFragment {
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String record = editText.getText().toString();
-                if (!TextUtils.isEmpty(record)) {
-                    //添加数据
-                    mRecordsDao.addRecords(record);
-                    Intent intent = new Intent(my_Context, SearchActivity.class);
-                    intent.putExtra("searchWord",record);
-                    my_Context.startActivity(intent);
-                }else {
-                    Toast.makeText(my_Context, "请输入搜索信息！", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        clearSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //清除搜索历史
+                ivSearch.setVisibility(View.GONE);
+                clearSearch.setVisibility(View.GONE);
+                mHistoryContent.setVisibility(View.GONE);
                 editText.setText("");
+                hideSoftInput(my_Context,v);
             }
         });
 
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivSearch.setVisibility(View.VISIBLE);
+                clearSearch.setVisibility(View.VISIBLE);
                 mHistoryContent.setVisibility(View.VISIBLE);
                 if (null == recordList || recordList.size() == 0) {
                     boolean isOverFlow = tagFlowLayout.isOverFlow();
@@ -341,9 +336,57 @@ public class HomeFragment extends BaseFragment {
                     }
 
                 }
-
             }
         });
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                    Toast.makeText(my_Context, "点击回车！", Toast.LENGTH_SHORT).show();
+                    String record = editText.getText().toString();
+                    if (!TextUtils.isEmpty(record)) {
+                        //添加数据
+                        mRecordsDao.addRecords(record);
+                        Intent intent = new Intent(my_Context, SearchActivity.class);
+                        intent.putExtra("searchWord",record);
+                        my_Context.startActivity(intent);
+                    }else {
+                        Toast.makeText(my_Context, "请输入搜索信息！", Toast.LENGTH_SHORT).show();
+                    }//隐藏软键盘
+                    hideSoftInput(my_Context,v);
+                }
+                return false;
+            }
+        });
+        clearSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //清除搜索历史
+                editText.setText("");
+            }
+        });
+
+//        searchFlag.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ivSearch.setVisibility(View.VISIBLE);
+//                clearSearch.setVisibility(View.VISIBLE);
+//                mHistoryContent.setVisibility(View.VISIBLE);
+//                if (null == recordList || recordList.size() == 0) {
+//                    boolean isOverFlow = tagFlowLayout.isOverFlow();
+//                    boolean isLimit = tagFlowLayout.isLimit();
+//                    if (isLimit && isOverFlow) {
+//                        moreArrow.setVisibility(View.VISIBLE);
+//                        if_show = true;
+//                    } else {
+//                        moreArrow.setVisibility(View.GONE);
+//                        if_show = false;
+//                    }
+//
+//                }
+//
+//            }
+//        });
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
